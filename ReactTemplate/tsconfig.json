@@ -1,11 +1,21 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "lib": ["es6"],
-    "sourceMap": true
+    "module": "esnext",
+    "target": "es5",
+    "lib": [ "es6", "es5", "dom", "es7" ],
+    "jsx": "react",
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "moduleResolution": "node"
   },
-  "exclude": [
-    "node_modules"
+  "include": [
+    "src",
+    "test",
+    "node_modules/@kirinnee"
   ]
 }

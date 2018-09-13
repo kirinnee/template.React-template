@@ -2,7 +2,7 @@
 let config = require('./config');
 
 
-function generate(path) {
+function generate(path,dir) {
     let input = config.input;
     let output = config.output;
 

@@ -37,6 +37,7 @@
     <Content Include="public\index.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\Counter.tsx" />
     <Content Include="src\style.scss" />
     <Content Include="webpack.config.js" />
     <Content Include="package.json" />
@@ -61,7 +62,10 @@
     <Compile Include="config\test\template.js" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\index.ts" />
+    <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\Repeat.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

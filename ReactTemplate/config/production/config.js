@@ -1,6 +1,6 @@
 module.exports = {
     input: {
-        index: './src/index.ts'
+        index: './src/index.tsx'
     },
     output: '[name].min.js'
 }
