@@ -34,6 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="public\index.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\style.scss" />
     <Content Include="webpack.config.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />

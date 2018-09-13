@@ -19,7 +19,20 @@ function generate(path, dir) {
         module: {
             rules: [
                 { test: /\.tsx?$/, use: 'awesome-typescript-loader' },
-                { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+                { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        'style-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true
+                            }
+                        },
+                        'sass-loader?sourceMap'
+                    ]
+                }
             ]
         }
     };
