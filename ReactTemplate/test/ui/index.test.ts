@@ -14,5 +14,5 @@ test('Test Hello', async t => {
         .click('#test-target .increase')
         .click('#test-target .increase');
     let text = await Selector('#test-target .output').innerText;
-    text.trim().should.be.equal('Hello Hello Hello');
+    text.trim().should.be.equal('Hello Hello Hello 2');
 });
