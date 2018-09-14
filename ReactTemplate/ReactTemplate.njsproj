@@ -34,13 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="public\index.html">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="src\Counter.tsx" />
+    <Content Include="src\index.html" />
     <Content Include="src\logo.svg" />
     <Content Include="src\style.scss" />
     <Content Include="test\mocha.opts" />
+    <Content Include="test\ui\tsconfig.json" />
     <Content Include="webpack.config.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -48,21 +47,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="config\" />
-    <Folder Include="config\development\" />
-    <Folder Include="config\production\" />
-    <Folder Include="config\unittest\" />
+    <Folder Include="config\test\" />
+    <Folder Include="dev\" />
     <Folder Include="public\" />
     <Folder Include="test\" />
     <Folder Include="src\" />
+    <Folder Include="test\ui\" />
+    <Folder Include="test\ui\target\" />
     <Folder Include="test\unit\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="config\development\config.js" />
-    <Compile Include="config\development\template.js" />
-    <Compile Include="config\production\config.js" />
-    <Compile Include="config\production\template.js" />
-    <Compile Include="config\unittest\config.js" />
-    <Compile Include="config\unittest\template.js" />
+    <Compile Include="config\config.js" />
+    <Compile Include="config\webpack.dev.js" />
+    <Compile Include="config\webpack.prod.js" />
+    <Compile Include="config\webpack.ui.js" />
+    <Compile Include="config\test\config.unit.js" />
+    <Compile Include="config\test\webpack.unit.js" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\image.d.ts">
@@ -73,6 +73,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Repeat.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="test\ui\index.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="test\unit\index.test.tsx" />

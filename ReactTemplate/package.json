@@ -7,9 +7,11 @@
     "name": ""
   },
   "scripts": {
-    "build": "webpack --env prod",
+    "build": "npm run test && webpack --env prod",
     "dev": "webpack --env dev --watch",
-    "unit-test": "webpack --env unit-test && mocha --require @babel/register --colors ./test/unit/*.test.js"
+    "test": "npm run unit-test && npm run ui-test",
+    "unit-test": "webpack --env unit-test && mocha --require @babel/register --colors ./test/unit/*.test.js",
+    "ui-test": "webpack --env ui-test && testcafe chrome:headless test/ui/index.test.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -26,11 +28,13 @@
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.0",
+    "testcafe": "^0.22.0",
     "typescript": "^3.0.3",
     "uglifyjs-webpack-plugin": "^1.3.0",
     "url-loader": "^1.1.1",

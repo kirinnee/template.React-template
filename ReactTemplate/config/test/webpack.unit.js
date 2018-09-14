@@ -1,4 +1,5 @@
-let config = require('./config');
+let config = require('./config.unit');
+let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 function generate(path, dir) {
@@ -6,15 +7,26 @@ function generate(path, dir) {
     let output = config.output;
 
     return config = {
-        mode: 'development',
+        mode: 'production',
         devtool: 'source-map',
         entry: input,
         output: {
             filename: output,
-            path: path.resolve(dir, './public/')
+            path: path.resolve(dir, './test/unit/')
         },
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".json"]
+        },
+        optimization: {
+            minimizer: [
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        output: {
+                            comments: false
+                        }
+                    }
+                })
+            ]
         },
         module: {
             rules: [
@@ -40,7 +52,7 @@ function generate(path, dir) {
                     options: {
                         name: '[path][name].[ext]',
                         publicPath: '',
-                        context: 'src/'
+                        context: 'test/'
                     }
                 }
             ]

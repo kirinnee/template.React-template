@@ -37,11 +37,11 @@ export class Counter extends React.Component<Prop, State> {
     render() {
 
         return (
-            <div>
-                <div>
+            <div id='test-target'>
+                <div className="output">
                     {(this.state.name + ' ').repeat(this.state.counter)}
                 </div>
-                <button onClick={this.Increase}>Increase</button>
+                <button className='increase' onClick={this.Increase}>Increase</button>
                 <button onClick={this.Decrease}>Decrease</button>
                 <input onChange={this.ChangeName} type='text' />
             </div>
