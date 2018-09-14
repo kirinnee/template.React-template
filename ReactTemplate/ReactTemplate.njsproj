@@ -75,6 +75,12 @@
     <TypeScriptCompile Include="src\Repeat.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\ServiceVendorBusinessForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\ServiceVendorName.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="test\ui\index.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
