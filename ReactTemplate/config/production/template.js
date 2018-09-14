@@ -1,6 +1,7 @@
 
 
 let config = require('./config');
+let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 function generate(path,dir) {
 
@@ -18,6 +19,17 @@ function generate(path,dir) {
         resolve: {
             extensions: [".ts", ".tsx", ".js", ".json"]
         },
+        optimization: {
+            minimizer: [
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        output: {
+                            comments: false
+                        }
+                    }
+                })
+            ]
+        },
         module: {
             rules: [
                 { test: /\.tsx?$/, use: 'awesome-typescript-loader' },
@@ -34,6 +46,16 @@ function generate(path,dir) {
                         },
                         'sass-loader?sourceMap'
                     ]
+                },
+                { test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/], loader: 'url-loader' },
+                {
+                    exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.(scss|css)$/, /\.html$/, /\.json$/],
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        publicPath: '',
+                        context: 'src/'
+                    }
                 }
             ]
         }

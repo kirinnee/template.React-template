@@ -1,4 +1,3 @@
-
 let config = require('./config');
 
 function generate(path, dir) {
@@ -32,7 +31,18 @@ function generate(path, dir) {
                         },
                         'sass-loader?sourceMap'
                     ]
+                },
+                { test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/], loader: 'url-loader' },
+                {
+                    exclude: [/\.(js|jsx|mjs)$/, /\.(ts|tsx)$/, /\.(scss|css)$/, /\.html$/, /\.json$/],
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        publicPath: '',
+                        context: 'src/'
+                    }
                 }
+
             ]
         }
     };

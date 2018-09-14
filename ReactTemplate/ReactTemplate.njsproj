@@ -38,6 +38,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\Counter.tsx" />
+    <Content Include="src\logo.svg" />
     <Content Include="src\style.scss" />
     <Content Include="webpack.config.js" />
     <Content Include="package.json" />
@@ -62,7 +63,13 @@
     <Compile Include="config\test\template.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\image.d.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\Pictureka.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Repeat.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
