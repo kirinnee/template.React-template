@@ -1,5 +1,3 @@
-
-
 let config = require('./config');
 let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 

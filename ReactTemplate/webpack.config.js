@@ -14,8 +14,8 @@ switch (env) {
     case "production":
         config = require('./config/production/template')(path, __dirname);
 		break;
-    case "test":
-        config = require('./config/test/template')(path, __dirname);
+    case "unit-test":
+        config = require('./config/unittest/template')(path, __dirname);
 		break;
 	default: throw new Error('unknown environment');
 }

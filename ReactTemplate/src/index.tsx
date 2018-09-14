@@ -5,12 +5,6 @@ import './style.scss';
 import { Repeat } from './Repeat';
 import { Counter } from './Counter';
 import { Pictureka } from './Pictureka';
-import { Kore } from '@kirinnee/core/src';
-
-
-let core: Core = new Kore();
-core.ExtendPrimitives();
-
 ReactDOM.render(
     <div>
         <Repeat string='hi' repeat={100} /> <Counter /><Pictureka/>

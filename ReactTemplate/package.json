@@ -8,15 +8,25 @@
   },
   "scripts": {
     "build": "webpack --env prod",
-    "dev": "webpack --env dev --watch"
+    "dev": "webpack --env dev --watch",
+    "unit-test": "webpack --env unit-test && mocha --require @babel/register --colors ./test/unit/*.test.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.1",
+    "@babel/register": "^7.0.0",
+    "@types/chai": "^4.1.4",
+    "@types/enzyme": "^3.1.13",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^8.0.14",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
     "awesome-typescript-loader": "^5.2.1",
+    "chai": "^4.1.2",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "file-loader": "^2.0.0",
+    "mocha": "^5.2.0",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.4",
@@ -31,6 +41,9 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@kirinnee/core": "^0.1.0",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "jsdom": "^12.0.0",
+    "jsdom-global": "^3.0.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0"
   }
