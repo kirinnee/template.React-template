@@ -34,9 +34,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="src\Counter.tsx" />
+    <Content Include="src\images\cross.svg" />
+    <Content Include="src\images\tick.svg" />
+    <Content Include="src\FormComponents\FormInput.tsx" />
+    <Content Include="src\Form\CoordinateRegistrationForm.tsx" />
     <Content Include="src\index.html" />
-    <Content Include="src\logo.svg" />
     <Content Include="src\style.scss" />
     <Content Include="test\mocha.opts" />
     <Content Include="test\ui\tsconfig.json" />
@@ -50,6 +52,9 @@
     <Folder Include="config\test\" />
     <Folder Include="dev\" />
     <Folder Include="public\" />
+    <Folder Include="src\FormComponents\" />
+    <Folder Include="src\Form\" />
+    <Folder Include="src\images\" />
     <Folder Include="test\" />
     <Folder Include="src\" />
     <Folder Include="test\ui\" />
@@ -68,6 +73,10 @@
     <TypeScriptCompile Include="src\Address.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\FormComponents\Password.tsx" />
+    <TypeScriptCompile Include="src\FormComponents\EmployeeNumber.tsx" />
+    <TypeScriptCompile Include="src\FormComponents\Contact.tsx" />
+    <TypeScriptCompile Include="src\FormComponents\NRIC.tsx" />
     <TypeScriptCompile Include="src\image.d.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -84,13 +93,13 @@
     <TypeScriptCompile Include="src\ServiceVendorBusinessForm.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\ServiceVendorName.tsx">
+    <TypeScriptCompile Include="src\FormComponents\Name.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\FormComponents\Validation.tsx" />
     <TypeScriptCompile Include="test\ui\index.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="test\unit\index.test.tsx" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
