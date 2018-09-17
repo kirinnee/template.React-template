@@ -2119,7 +2119,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "body {\n  margin: 0; }\n\n.clearfix::after {\n  content: \"\";\n  clear: both;\n  display: table; }\n\n.form-item, .form-group label, .form-group .form-input-holder, .form-group .form-input-holder .input-size, .form-icon-holder {\n  height: 20px;\n  float: left;\n  display: block;\n  position: relative;\n  font-family: sans-serif;\n  font-size: 16px; }\n\n.form-group {\n  width: 100%;\n  height: 20px;\n  margin: 5px 0 20px; }\n  .form-group label {\n    line-height: 20px;\n    width: 200px; }\n  .form-group .form-input-holder .input-size {\n    padding: 0 5px;\n    border: 1px solid black;\n    border-radius: 3px;\n    width: 200px; }\n\n.form-container {\n  padding: 50px;\n  width: 500px;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.form-icon-holder {\n  margin: 0 5px; }\n  .form-icon-holder img {\n    position: absolute;\n    height: 20px; }\n\n.form-input-invalid-message {\n  color: indianred;\n  font-size: 12px;\n  font-family: sans-serif; }\n\n#coord-form {\n  border: solid black 1px;\n  top: 50%;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  border-radius: 20px; }\n", ""]);
+exports.push([module.i, "body {\n  margin: 0; }\n\n.clearfix::after {\n  content: \"\";\n  clear: both;\n  display: table; }\n\n.form-item, .form-group label, .form-group .form-input-holder, .form-group .form-input-holder .input-size, .form-icon-holder {\n  height: 20px;\n  float: left;\n  display: block;\n  position: relative;\n  font-family: sans-serif;\n  font-size: 16px; }\n\n.form-group {\n  width: 100%;\n  height: 20px;\n  margin: 5px 0 20px; }\n  .form-group label {\n    line-height: 20px;\n    width: 200px; }\n  .form-group .form-input-holder .input-size {\n    padding: 0 5px;\n    border: 1px solid black;\n    border-radius: 3px;\n    width: 200px; }\n\n.form-container {\n  padding: 50px;\n  width: 500px;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.form-icon-holder {\n  margin: 0 5px; }\n  .form-icon-holder img {\n    position: absolute;\n    height: 20px; }\n\n.form-input-invalid-message {\n  color: indianred;\n  font-size: 12px;\n  font-family: sans-serif; }\n\n#coord-form {\n  border: solid black 1px;\n  top: 50%;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  border-radius: 20px; }\n\n#address-form-group {\n  height: 180px; }\n\n#payment-preference-form-group {\n  height: 100px; }\n\n.input-instructions {\n  font-size: 12px;\n  font-family: sans-serif; }\n", ""]);
 
 // exports
 
@@ -23712,23 +23712,116 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ "./src/Form/CoordinateRegistrationForm.tsx":
-/*!*************************************************!*\
-  !*** ./src/Form/CoordinateRegistrationForm.tsx ***!
-  \*************************************************/
-/*! exports provided: CoordinateRegister */
+/***/ "./src/Address.tsx":
+/*!*************************!*\
+  !*** ./src/Address.tsx ***!
+  \*************************/
+/*! exports provided: Address */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoordinateRegister", function() { return CoordinateRegister; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Address", function() { return Address; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _FormComponents_Name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormComponents/Name */ "./src/FormComponents/Name.tsx");
-/* harmony import */ var _FormComponents_NRIC__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormComponents/NRIC */ "./src/FormComponents/NRIC.tsx");
-/* harmony import */ var _FormComponents_EmployeeNumber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormComponents/EmployeeNumber */ "./src/FormComponents/EmployeeNumber.tsx");
-/* harmony import */ var _FormComponents_Contact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FormComponents/Contact */ "./src/FormComponents/Contact.tsx");
-/* harmony import */ var _FormComponents_Password__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../FormComponents/Password */ "./src/FormComponents/Password.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+var Address = /** @class */ (function (_super) {
+    __extends(Address, _super);
+    function Address(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state =
+            {
+                lineOne: 'Line One',
+                lineTwo: 'Line Two',
+                postalCode: 'Postal Code',
+                city: 'City',
+                country: 'Country'
+            };
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
+    }
+    Address.prototype.handleChange = function (event) {
+        var target = event.target;
+        var name = target.name;
+        var value = '';
+        if (name == "lineOne") {
+            value = target.value;
+        }
+        ;
+        if (name == "lineTwo") {
+            value = target.value;
+        }
+        ;
+        if (name == "postalCode") {
+            value = target.value;
+        }
+        ;
+        if (name == "city") {
+            value = target.value;
+        }
+        ;
+        if (name == "country") {
+            value = target.value;
+        }
+        ;
+        var newState = {};
+        newState[name] = value;
+        this.setState(newState);
+        this.props["updateAddress"](this.state);
+    };
+    Address.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { id: "address-form-group", className: "form-group" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, "Address"),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-input-holder" },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size", name: "lineOne", type: "text", placeholder: this.state.lineOne, onChange: this.handleChange }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size", name: "lineTwo", type: "text", placeholder: this.state.lineTwo, onChange: this.handleChange }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size", name: "postalCode", type: "text", placeholder: this.state.postalCode, onChange: this.handleChange }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size", name: "city", type: "text", placeholder: this.state.city, onChange: this.handleChange }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size", name: "country", type: "text", placeholder: this.state.country, onChange: this.handleChange }))));
+    };
+    return Address;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
+/***/ "./src/Form/ServiceVendorBusinessForm.tsx":
+/*!************************************************!*\
+  !*** ./src/Form/ServiceVendorBusinessForm.tsx ***!
+  \************************************************/
+/*! exports provided: ServiceVendorBusinessForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceVendorBusinessForm", function() { return ServiceVendorBusinessForm; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Address__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Address */ "./src/Address.tsx");
+/* harmony import */ var _PaymentPreference__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PaymentPreference */ "./src/PaymentPreference.tsx");
+/* harmony import */ var _FormComponents_Name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormComponents/Name */ "./src/FormComponents/Name.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -23746,137 +23839,75 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
-
-
-var CoordinateRegister = /** @class */ (function (_super) {
-    __extends(CoordinateRegister, _super);
-    function CoordinateRegister(props) {
-        var _this = _super.call(this, props) || this;
-        _this.updateName = function (name) {
-            _this.setState({ name: name });
-        };
-        _this.updatePassword = function (password) {
-            _this.setState({ password: password });
-        };
-        _this.state = {
-            name: '',
-            nric: null,
-            employeeNumber: '',
-            contact: '',
-            password: null
-        };
+var ServiceVendorBusinessForm = /** @class */ (function (_super) {
+    __extends(ServiceVendorBusinessForm, _super);
+    function ServiceVendorBusinessForm(prop) {
+        var _this = _super.call(this, prop) || this;
+        _this.state =
+            {
+                name: '',
+                address: {
+                    lineOne: '',
+                    lineTwo: '',
+                    postalCode: '',
+                    city: '',
+                    country: ''
+                },
+                uen: '',
+                employeeCount: '--Please Select--',
+                paymentPreference: ''
+            };
+        _this.updateEmployeeCount = _this.updateEmployeeCount.bind(_this);
+        _this.updateUEN = _this.updateUEN.bind(_this);
+        _this.submitForm = _this.submitForm.bind(_this);
+        _this.updateName = _this.updateName.bind(_this);
+        _this.updateAddress = _this.updateAddress.bind(_this);
+        _this.updatePaymentPreference = _this.updatePaymentPreference.bind(_this);
         return _this;
     }
-    CoordinateRegister.prototype.render = function () {
+    ServiceVendorBusinessForm.prototype.updateEmployeeCount = function (event) {
+        this.setState({ employeeCount: event.target.value });
+        console.log(event.target.value);
+    };
+    ServiceVendorBusinessForm.prototype.updateUEN = function (event) {
+        this.setState({ uen: event.target.value });
+        console.log(event.target.value);
+    };
+    ServiceVendorBusinessForm.prototype.updateName = function (val) {
+        this.setState({ name: val });
+        console.log(val);
+    };
+    ServiceVendorBusinessForm.prototype.updateAddress = function (val) {
+        this.setState({ address: val });
+        console.log(this.state);
+    };
+    ServiceVendorBusinessForm.prototype.updatePaymentPreference = function (val) {
+        this.setState({ paymentPreference: val });
+        console.log(this.state);
+    };
+    ServiceVendorBusinessForm.prototype.submitForm = function () {
+        sessionStorage.setItem("Business", JSON.stringify(this.state));
+    };
+    ServiceVendorBusinessForm.prototype.render = function () {
         return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: 'form-container', id: this.props.formid },
             react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("form", null,
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Name__WEBPACK_IMPORTED_MODULE_1__["NameInput"], { getName: this.updateName }),
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_NRIC__WEBPACK_IMPORTED_MODULE_2__["NRICInput"], null),
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_EmployeeNumber__WEBPACK_IMPORTED_MODULE_3__["EmployeeNumberInput"], null),
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Contact__WEBPACK_IMPORTED_MODULE_4__["ContactInput"], null),
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Password__WEBPACK_IMPORTED_MODULE_5__["PasswordInput"], { getPassword: this.updatePassword }))));
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Name__WEBPACK_IMPORTED_MODULE_3__["NameInput"], { getName: this.updateName }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Address__WEBPACK_IMPORTED_MODULE_1__["Address"], { updateAddress: this.updateAddress }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](FormInput, { cls: '', addition: undefined, type: 'text', label: 'UEN', value: this.state.uen, change: this.updateUEN }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-group" },
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, "Company Size"),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-input-holder" },
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("select", { required: true, name: "employeeCount", value: this.state.employeeCount, onChange: this.updateEmployeeCount },
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "", hidden: true }, "\u00A0--Please Select--"),
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Micro: Less than 10" }, "\u00A0Micro: Less than 10"),
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Small: 10 - 49" }, "\u00A0Small: 10 - 49"),
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Medium: 50 - 249" }, "\u00A0Medium: 50 - 249"),
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Large: More than 249" }, "\u00A0Large: More than 249")))),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_PaymentPreference__WEBPACK_IMPORTED_MODULE_2__["PaymentPreference"], { updatePaymentPreference: this.updatePaymentPreference }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("hr", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { type: "submit", value: "Submit", onClick: this.submitForm }))));
     };
-    return CoordinateRegister;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
-
-
-
-/***/ }),
-
-/***/ "./src/FormComponents/Contact.tsx":
-/*!****************************************!*\
-  !*** ./src/FormComponents/Contact.tsx ***!
-  \****************************************/
-/*! exports provided: ContactInput */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactInput", function() { return ContactInput; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    }
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-var ContactInput = /** @class */ (function (_super) {
-    __extends(ContactInput, _super);
-    function ContactInput(props) {
-        var _this = _super.call(this, props) || this;
-        _this.setValue = function (event) {
-            _this.setState({
-                value: event.target['value']
-            });
-        };
-        _this.state = { value: '' };
-        return _this;
-    }
-    ContactInput.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Contact No.', type: 'tel', value: this.state.value, addition: undefined, change: this.setValue }));
-    };
-    return ContactInput;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
-
-
-
-/***/ }),
-
-/***/ "./src/FormComponents/EmployeeNumber.tsx":
-/*!***********************************************!*\
-  !*** ./src/FormComponents/EmployeeNumber.tsx ***!
-  \***********************************************/
-/*! exports provided: EmployeeNumberInput */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmployeeNumberInput", function() { return EmployeeNumberInput; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    }
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-var EmployeeNumberInput = /** @class */ (function (_super) {
-    __extends(EmployeeNumberInput, _super);
-    function EmployeeNumberInput(props) {
-        var _this = _super.call(this, props) || this;
-        _this.setValue = function (event) {
-            _this.setState({
-                value: event.target['value']
-            });
-        };
-        _this.state = { value: '' };
-        return _this;
-    }
-    EmployeeNumberInput.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Employee No.', type: 'text', value: this.state.value, addition: undefined, change: this.setValue }));
-    };
-    return EmployeeNumberInput;
+    return ServiceVendorBusinessForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
 
@@ -23926,89 +23957,6 @@ var FormInput = /** @class */ (function (_super) {
                 addComponent && this.props.addition)));
     };
     return FormInput;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
-
-
-
-/***/ }),
-
-/***/ "./src/FormComponents/NRIC.tsx":
-/*!*************************************!*\
-  !*** ./src/FormComponents/NRIC.tsx ***!
-  \*************************************/
-/*! exports provided: NRICInput */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NRICInput", function() { return NRICInput; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
-/* harmony import */ var _Validation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Validation */ "./src/FormComponents/Validation.tsx");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    }
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-var NRICInput = /** @class */ (function (_super) {
-    __extends(NRICInput, _super);
-    function NRICInput(props) {
-        var _this = _super.call(this, props) || this;
-        _this.CheckNRICValidity = function (event) {
-            var val = event.target['value'];
-            var nric = val === null ? '' : val;
-            _this.setState({ nric: nric });
-            if (_this.IsNRICValid(nric)) {
-                _this.setState({ valid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid });
-            }
-            else {
-                _this.setState({ valid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid });
-            }
-        };
-        _this.state = { nric: '', valid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].none };
-        return _this;
-    }
-    NRICInput.prototype.IsNRICValid = function (nric) {
-        if (nric.length !== 9 ||
-            !['S', 'T', 'G', 'F'].includes(nric[0].toUpperCase())) {
-            return false;
-        }
-        var lastLetter = nric[8].toUpperCase();
-        var nricCheckDigits = 'JZIHGFEDCBA';
-        var finCheckDigits = 'XWUTRQPNMLK';
-        var digits = nric.slice(1, 8);
-        var weights = [2, 7, 6, 5, 4, 3, 2];
-        var sum = 0;
-        if (isNaN(parseInt(digits))) {
-            return false;
-        }
-        if (['T', 'G'].includes(nric[0].toUpperCase())) {
-            sum += 4;
-        }
-        for (var i = 0; i < digits.length; i++) {
-            sum += parseInt(digits.charAt(i), 10) * weights[i];
-        }
-        if (['S', 'T'].includes(nric[0].toUpperCase())) {
-            return nricCheckDigits.charAt(sum % 11) === lastLetter;
-        }
-        return finCheckDigits.charAt(sum % 11) === lastLetter;
-    };
-    NRICInput.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'NRIC', type: 'text', value: this.state.nric, addition: react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Validation__WEBPACK_IMPORTED_MODULE_2__["ValidityIcon"], { valid: this.state.valid, message: 'NRIC is in an invalid format' }), change: this.CheckNRICValidity }));
-    };
-    return NRICInput;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
 
@@ -24067,20 +24015,18 @@ var NameInput = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./src/FormComponents/Password.tsx":
-/*!*****************************************!*\
-  !*** ./src/FormComponents/Password.tsx ***!
-  \*****************************************/
-/*! exports provided: PasswordInput */
+/***/ "./src/PaymentPreference.tsx":
+/*!***********************************!*\
+  !*** ./src/PaymentPreference.tsx ***!
+  \***********************************/
+/*! exports provided: PaymentPreference */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PasswordInput", function() { return PasswordInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentPreference", function() { return PaymentPreference; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
-/* harmony import */ var _Validation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Validation */ "./src/FormComponents/Validation.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -24095,189 +24041,57 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 
-
-
-var PasswordInput = /** @class */ (function (_super) {
-    __extends(PasswordInput, _super);
-    function PasswordInput(props) {
+var PaymentPreference = /** @class */ (function (_super) {
+    __extends(PaymentPreference, _super);
+    function PaymentPreference(props) {
         var _this = _super.call(this, props) || this;
-        //Validations, and message setting
-        _this.isPasswordValid = function (pw) {
-            if (pw.length < 8) {
-                _this.setInvalidPasswordMessage('Password needs to be 8 characters long');
-                return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
-            }
-            if (!/\d/.test(pw)) {
-                _this.setInvalidPasswordMessage('Password needs to be alphanumeric');
-                return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
-            }
-            if (pw.toLowerCase() === pw) {
-                _this.setInvalidPasswordMessage('Password need at least 1 character in uppercase');
-                return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
-            }
-            _this.setInvalidPasswordMessage('');
-            return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid;
-        };
-        _this.isRepeatValid = function (current, repeat) {
-            var valid = current === repeat;
-            var message = valid ? '' : 'Passwords do not match';
-            _this.setInvalidRepeatMessage(message);
-            return valid ? _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid : _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
-        };
-        //Event Handler
-        _this.handePasswordChange = function (event) {
-            var password = event.target['value'];
-            var repeat = _this.state.repeatpassword;
-            _this.passwordChange(password);
-            var result = _this.repeatChange(password, repeat);
-            _this.props.getPassword(result === _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid ? repeat : null);
-        };
-        _this.handeRepeatChange = function (event) {
-            var repeat = event.target['value'];
-            var password = _this.state.password;
-            var result = _this.repeatChange(password, repeat);
-            _this.props.getPassword(result === _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid ? repeat : null);
-        };
-        _this.state = {
-            password: '',
-            repeatpassword: '',
-            passwordValid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].none,
-            repeatValid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].none,
-            invalidPaswordMessage: '',
-            invalidRepeatMessage: ''
-        };
+        _this.state =
+            {
+                preferredPaymentOptions: []
+            };
+        _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
-    //State Setting
-    PasswordInput.prototype.setInvalidPasswordMessage = function (valid) {
-        this.setState({ invalidPaswordMessage: valid });
+    PaymentPreference.prototype.IsPaymentPreferenceValid = function (preferredPaymentOptions) {
+        if (preferredPaymentOptions.length == 0)
+            return false;
+        return true;
     };
-    PasswordInput.prototype.setInvalidRepeatMessage = function (valid) {
-        this.setState({ invalidRepeatMessage: valid });
-    };
-    //Update Input
-    PasswordInput.prototype.setPassword = function (password) {
-        this.setState({ password: password });
-    };
-    PasswordInput.prototype.setRepeat = function (repeatpassword) {
-        this.setState({ repeatpassword: repeatpassword });
-    };
-    //RealMethods
-    PasswordInput.prototype.passwordChange = function (password) {
-        this.setPassword(password);
-        var valid = this.isPasswordValid(password);
-        this.setState({ passwordValid: valid });
-        return valid;
-    };
-    PasswordInput.prototype.repeatChange = function (password, repeat) {
-        this.setRepeat(repeat);
-        var v = this.isRepeatValid(password, repeat);
-        if (v === _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid && this.isPasswordValid(password) !== _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid) {
-            v = _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
+    PaymentPreference.prototype.handleClick = function (event) {
+        if (this.state.preferredPaymentOptions.Contains(event.target.name)) {
+            var newState = this.state.preferredPaymentOptions.RemoveValue(event.target.name);
+            this.setState({ preferredPaymentOptions: newState });
         }
-        this.setState({ repeatValid: v });
-        return v;
+        else {
+            this.state.preferredPaymentOptions.push(event.target.name);
+            this.setState({ preferredPaymentOptions: this.state.preferredPaymentOptions });
+        }
+        this.props["updatePaymentPreference"](this.state.preferredPaymentOptions);
     };
-    PasswordInput.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Password', type: 'password', value: this.state.password, addition: react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Validation__WEBPACK_IMPORTED_MODULE_2__["ValidityIcon"], { valid: this.state.passwordValid, message: this.state.invalidPaswordMessage }), change: this.handePasswordChange }),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Retype Password', type: 'password', value: this.state.repeatpassword, addition: react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Validation__WEBPACK_IMPORTED_MODULE_2__["ValidityIcon"], { valid: this.state.repeatValid, message: this.state.invalidRepeatMessage }), change: this.handeRepeatChange })));
+    PaymentPreference.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { id: "payment-preference-form-group", className: "form-group" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null,
+                "Payment Preference ",
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                " ",
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "input-instructions" }, "Select at least one preference")),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-input-holder" },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "Cash", type: "checkbox", onClick: this.handleClick }),
+                "Cash ",
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "Cheque", type: "checkbox", onClick: this.handleClick }),
+                "Cheque ",
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "PayNow", type: "checkbox", onClick: this.handleClick }),
+                "PayNow ",
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "Internet Banking", type: "checkbox", onClick: this.handleClick }),
+                "Internet Banking")));
     };
-    return PasswordInput;
+    return PaymentPreference;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
 
-
-/***/ }),
-
-/***/ "./src/FormComponents/Validation.tsx":
-/*!*******************************************!*\
-  !*** ./src/FormComponents/Validation.tsx ***!
-  \*******************************************/
-/*! exports provided: Validity, ValidityIcon */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Validity", function() { return Validity; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidityIcon", function() { return ValidityIcon; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _images_tick_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../images/tick.svg */ "./src/images/tick.svg");
-/* harmony import */ var _images_tick_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_images_tick_svg__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _images_cross_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../images/cross.svg */ "./src/images/cross.svg");
-/* harmony import */ var _images_cross_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_images_cross_svg__WEBPACK_IMPORTED_MODULE_2__);
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    }
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-var Validity;
-(function (Validity) {
-    Validity[Validity["valid"] = 0] = "valid";
-    Validity[Validity["invalid"] = 1] = "invalid";
-    Validity[Validity["none"] = 2] = "none";
-})(Validity || (Validity = {}));
-var ValidityIcon = /** @class */ (function (_super) {
-    __extends(ValidityIcon, _super);
-    function ValidityIcon(props) {
-        return _super.call(this, props) || this;
-    }
-    ValidityIcon.prototype.render = function () {
-        var _this = this;
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-icon-holder" }, (function () {
-                switch (_this.props.valid) {
-                    case Validity.none:
-                        return null;
-                    case Validity.valid:
-                        return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("img", { src: _images_tick_svg__WEBPACK_IMPORTED_MODULE_1___default.a });
-                    case Validity.invalid:
-                        return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("img", { src: _images_cross_svg__WEBPACK_IMPORTED_MODULE_2___default.a });
-                    default:
-                        throw new Error('ArgumentException: Unknown validity enum');
-                }
-            })()),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: 'form-input-invalid-message' }, this.props.valid === Validity.invalid &&
-                this.props.message)));
-    };
-    return ValidityIcon;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
-
-
-
-/***/ }),
-
-/***/ "./src/images/cross.svg":
-/*!******************************!*\
-  !*** ./src/images/cross.svg ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/cross.svg";
-
-/***/ }),
-
-/***/ "./src/images/tick.svg":
-/*!*****************************!*\
-  !*** ./src/images/tick.svg ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/tick.svg";
 
 /***/ }),
 
@@ -24296,16 +24110,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _kirinnee_core_src__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @kirinnee/core/src */ "./node_modules/@kirinnee/core/src/index.ts");
-/* harmony import */ var _Form_CoordinateRegistrationForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Form/CoordinateRegistrationForm */ "./src/Form/CoordinateRegistrationForm.tsx");
+/* harmony import */ var _Form_ServiceVendorBusinessForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Form/ServiceVendorBusinessForm */ "./src/Form/ServiceVendorBusinessForm.tsx");
+/* harmony import */ var _kirinnee_core_src__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @kirinnee/core/src */ "./node_modules/@kirinnee/core/src/index.ts");
 
 
 
 
-var c = new _kirinnee_core_src__WEBPACK_IMPORTED_MODULE_3__["Kore"]();
+
+var c = new _kirinnee_core_src__WEBPACK_IMPORTED_MODULE_4__["Kore"]();
 c.ExtendPrimitives();
-
-react_dom__WEBPACK_IMPORTED_MODULE_1__["render"](react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Form_CoordinateRegistrationForm__WEBPACK_IMPORTED_MODULE_4__["CoordinateRegister"], { formid: 'coord-form' }), document.getElementById('app'));
+react_dom__WEBPACK_IMPORTED_MODULE_1__["render"](react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Form_ServiceVendorBusinessForm__WEBPACK_IMPORTED_MODULE_3__["ServiceVendorBusinessForm"], { formid: "ServiceVendorBusinessForm" }), document.getElementById('app'));
 
 
 /***/ }),

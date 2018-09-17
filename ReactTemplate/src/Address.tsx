@@ -49,14 +49,16 @@ class Address extends React.Component<IProp, IState> {
 
     render() {
         return (
-            <label>
-                Address:
-                &nbsp;<input name="lineOne" type="text" placeholder={this.state.lineOne} onChange={this.handleChange} /><br/>
-                &nbsp;<input name="lineTwo" type="text" placeholder={this.state.lineTwo} onChange={this.handleChange} /><br/>
-                &nbsp;<input name="postalCode" type="text" placeholder={this.state.postalCode} onChange={this.handleChange} /><br/>
-                &nbsp;<input name="city" type="text" placeholder={this.state.city} onChange={this.handleChange} /><br/>
-                &nbsp;<input name="country" type="text" placeholder={this.state.country} onChange={this.handleChange}/>
-            </label>
+            <div id="address-form-group" className="form-group">
+                <label>Address</label>
+                <div className="form-input-holder">
+                    <input className={"input-size"} name="lineOne" type="text" placeholder={this.state.lineOne} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="lineTwo" type="text" placeholder={this.state.lineTwo} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="postalCode" type="text" placeholder={this.state.postalCode} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="city" type="text" placeholder={this.state.city} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="country" type="text" placeholder={this.state.country} onChange={this.handleChange} />
+                </div>
+            </div>
         );
     }
 }

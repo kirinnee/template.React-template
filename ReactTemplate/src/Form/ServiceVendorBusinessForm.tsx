@@ -4,13 +4,13 @@ import { PaymentPreference } from '../PaymentPreference';
 import { NameInput } from '../FormComponents/Name';
 
 interface IProp {
-
+    formid: string;
 }
 
 interface IState {
     name: string;
     address: IAddress;
-    aCRANumber: string;
+    uen: string;
     employeeCount: string;
     paymentPreference: string;
 }
@@ -30,11 +30,12 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
                 city: '',
                 country:''
             },
-            aCRANumber: '',
+            uen: '',
             employeeCount: '--Please Select--',
             paymentPreference:''
             };
-        this.handleChange = this.handleChange.bind(this);
+        this.updateEmployeeCount = this.updateEmployeeCount.bind(this);
+        this.updateUEN = this.updateUEN.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.updateName = this.updateName.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
@@ -42,20 +43,14 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
 
     }
 
-    handleChange(event) {
-        let target = event.target;
-        let name: "aCRANumber" | "employeeCount" | "paymentPreference" = target.name;
-        var value:string = '';
-        if (name == "aCRANumber") { value = target.value };
-        if (name == "employeeCount") { value = target.value };
-        if (name == "paymentPreference") { value = target.value };
+    updateEmployeeCount(event) {
+        this.setState({ employeeCount: event.target.value });
+        console.log(event.target.value);
+    }
 
-        let newState = {};
-        newState[name] = value;
-        console.log(value);
-        this.setState(newState);
-        console.log(name);
-        console.log(newState);
+    updateUEN(event) {
+        this.setState({ uen: event.target.value });
+        console.log(event.target.value);
     }
 
     updateName(val) {
@@ -74,33 +69,33 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
     }
 
     submitForm() {
-        localStorage.setItem("Business", JSON.stringify(this.state));
+        sessionStorage.setItem("Business", JSON.stringify(this.state));
     }
-
+    tt
     render() {
         return (
-            <form>
-                <NameInput getName={this.updateName} /><br />
-                <Address updateAddress={this.updateAddress}/><br />
-                <label>
-                    UEN: &nbsp;
-                    <input name="aCRANumber" type="text" value={this.state.aCRANumber} onChange={this.handleChange} />
-                </label><br />
-                
-
-                <label>
-                    Company Size: &nbsp;
-                    <select name="employeeCount" value={this.state.employeeCount} onChange={this.handleChange}>
-                        <option value="Micro: Less than 10">&nbsp;Micro: Less than 10</option>
-                        <option value="Small: 10 - 49">&nbsp;Small: 10 - 49</option>
-                        <option value="Medium: 50 - 249">&nbsp;Medium: 50 - 249</option>
-                        <option value="Large: More than 249">&nbsp;Large: More than 249</option>
-                    </select>
-                </label><br />
-                <PaymentPreference updatePaymentPreference={this.updatePaymentPreference}/>
-                <hr />
-                <input type="submit" value="Submit" onClick={this.submitForm}/>
-            </form>
+            <div className='form-container' id={this.props.formid}>
+                <form>
+                    <NameInput getName={this.updateName} />
+                    <Address updateAddress={this.updateAddress} />
+                    <FormInput cls='' addition={undefined} type='text' label='UEN' value={this.state.uen} change={this.updateUEN} />                        
+                    <div className="form-group">
+                        <label>Company Size</label>
+                        <div className="form-input-holder">
+                            <select required name="employeeCount" value={this.state.employeeCount} onChange={this.updateEmployeeCount}>
+                                <option value="" hidden>&nbsp;--Please Select--</option>
+                                <option value="Micro: Less than 10">&nbsp;Micro: Less than 10</option>
+                                <option value="Small: 10 - 49">&nbsp;Small: 10 - 49</option>
+                                <option value="Medium: 50 - 249">&nbsp;Medium: 50 - 249</option>
+                                <option value="Large: More than 249">&nbsp;Large: More than 249</option>
+                            </select>
+                        </div>
+                    </div>
+                    <PaymentPreference updatePaymentPreference={this.updatePaymentPreference}/>
+                    <hr />
+                    <input type="submit" value="Submit" onClick={this.submitForm}/>
+                </form>
+            </div>
         );
     }
 }
