@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { NameInput } from '../FormComponents/Name';
 import { NRICInput } from '../FormComponents/NRIC';
 import { EmployeeNumberInput } from '../FormComponents/EmployeeNumber';
 import { ContactInput } from '../FormComponents/Contact';
@@ -19,7 +18,6 @@ export class CoordinateRegister extends React.Component<IProp, IState> {
         return (
             <div className='form-container' id={this.props.formid}>
                 <form>
-                    <NameInput />
                     <NRICInput />
                     <EmployeeNumberInput />
                     <ContactInput />

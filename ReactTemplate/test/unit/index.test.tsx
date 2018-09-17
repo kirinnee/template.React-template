@@ -19,6 +19,5 @@ describe('<Address/>', () => {
         wrapper.state("postalCode").should.be.equal('Postal Code');
         wrapper.state("city").should.be.equal('City');
         wrapper.state("country").should.be.equal('Country');
-    });
-    
+    });   
 });
