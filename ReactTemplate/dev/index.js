@@ -98,7 +98,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "body {\n  margin: 0; }\n\n.clearfix::after {\n  content: \"\";\n  clear: both;\n  display: table; }\n\n.form-item, .form-group label, .form-group .form-input-holder, .form-group .form-input-holder .input-size, .form-icon-holder {\n  height: 20px;\n  float: left;\n  display: block;\n  position: relative;\n  font-family: sans-serif;\n  font-size: 16px; }\n\n.form-group {\n  width: 100%;\n  height: 20px;\n  margin: 5px 0 20px; }\n  .form-group label {\n    line-height: 20px;\n    width: 200px; }\n  .form-group .form-input-holder .input-size {\n    padding: 0 5px;\n    border: 1px solid black;\n    border-radius: 3px;\n    width: 200px; }\n\n.form-container {\n  width: 500px;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.form-icon-holder {\n  margin: 0 5px; }\n  .form-icon-holder img {\n    position: absolute;\n    height: 20px; }\n\n.form-input-invalid-message {\n  color: indianred;\n  font-size: 12px;\n  font-family: sans-serif; }\n", ""]);
+exports.push([module.i, "body {\n  margin: 0; }\n\n.clearfix::after {\n  content: \"\";\n  clear: both;\n  display: table; }\n\n.form-item, .form-group label, .form-group .form-input-holder, .form-group .form-input-holder .input-size, .form-icon-holder {\n  height: 20px;\n  float: left;\n  display: block;\n  position: relative;\n  font-family: sans-serif;\n  font-size: 16px; }\n\n.form-group {\n  width: 100%;\n  height: 20px;\n  margin: 5px 0 20px; }\n  .form-group label {\n    line-height: 20px;\n    width: 200px; }\n  .form-group .form-input-holder .input-size {\n    padding: 0 5px;\n    border: 1px solid black;\n    border-radius: 3px;\n    width: 200px; }\n\n.form-container {\n  padding: 50px;\n  width: 500px;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.form-icon-holder {\n  margin: 0 5px; }\n  .form-icon-holder img {\n    position: absolute;\n    height: 20px; }\n\n.form-input-invalid-message {\n  color: indianred;\n  font-size: 12px;\n  font-family: sans-serif; }\n\n#coord-form {\n  border: solid black 1px;\n  top: 50%;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  border-radius: 20px; }\n", ""]);
 
 // exports
 
@@ -21733,8 +21733,8 @@ var CoordinateRegister = /** @class */ (function (_super) {
         return _super.call(this, props) || this;
     }
     CoordinateRegister.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: 'form-container' },
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("form", { id: this.props.formid },
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: 'form-container', id: this.props.formid },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("form", null,
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Name__WEBPACK_IMPORTED_MODULE_1__["NameInput"], null),
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_NRIC__WEBPACK_IMPORTED_MODULE_2__["NRICInput"], null),
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_EmployeeNumber__WEBPACK_IMPORTED_MODULE_3__["EmployeeNumberInput"], null),
@@ -21887,7 +21887,7 @@ var FormInput = /** @class */ (function (_super) {
                 this.props.label,
                 " "),
             react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-input-holder" },
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size", type: this.props.type, value: this.props.value, onChange: this.props.change }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size " + this.props.cls, type: this.props.type, value: this.props.value, onChange: this.props.change }),
                 addComponent && this.props.addition)));
     };
     return FormInput;

@@ -17,8 +17,8 @@ export class CoordinateRegister extends React.Component<IProp, IState> {
 
     render() {
         return (
-            <div className='form-container'>
-                <form id={this.props.formid}>
+            <div className='form-container' id={this.props.formid}>
+                <form>
                     <NameInput />
                     <NRICInput />
                     <EmployeeNumberInput />
