@@ -65,10 +65,16 @@
     <Compile Include="config\test\webpack.unit.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\Address.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\image.d.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\PaymentPreference.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pictureka.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

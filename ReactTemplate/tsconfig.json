@@ -15,6 +15,7 @@
   },
   "include": [
     "src",
-    "test/unit/"
+    "test/unit/",
+    "node_modules/@kirinnee"
   ]
 }

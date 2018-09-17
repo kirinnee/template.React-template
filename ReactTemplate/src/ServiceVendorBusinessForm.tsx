@@ -1,4 +1,8 @@
 ﻿import * as React from 'react';
+import { ServiceVendorName } from './ServiceVendorName';
+import { IAddress, Address } from './Address';
+import { PaymentPreference } from './PaymentPreference';
+
 
 
 interface IProp {
@@ -6,20 +10,11 @@ interface IProp {
 }
 
 interface IState {
-
     name: string;
     address: IAddress;
     aCRANumber: string;
-    employeeCount: number;
+    employeeCount: string;
     paymentPreference: string;
-}
-
-interface IAddress {
-    lineOne: string;
-    lineTwo: string;
-    postalCode: string;
-    city: string;
-    country: string;
 }
 
 export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
@@ -38,27 +33,73 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
                 country:''
             },
             aCRANumber: '',
-            employeeCount: 0,
+            employeeCount: '--Please Select--',
             paymentPreference:''
-        };
+            };
+        this.handleChange = this.handleChange.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+        this.updateName = this.updateName.bind(this);
+        this.updateAddress = this.updateAddress.bind(this);
+        this.updatePaymentPreference = this.updatePaymentPreference.bind(this);
+
+    }
+
+    handleChange(event) {
+        let target = event.target;
+        let name: "aCRANumber" | "employeeCount" | "paymentPreference" = target.name;
+        var value:string = '';
+        if (name == "aCRANumber") { value = target.value };
+        if (name == "employeeCount") { value = target.value };
+        if (name == "paymentPreference") { value = target.value };
+
+        let newState = {};
+        newState[name] = value;
+        console.log(value);
+        this.setState(newState);
+        console.log(name);
+        console.log(newState);
+    }
+
+    updateName(val) {
+        this.setState({ name: val });
+        console.log(val);
+    }
+
+    updateAddress(val) {
+        this.setState({ address: val });
+        console.log(this.state);
+    }
+
+    updatePaymentPreference(val) {
+        this.setState({ paymentPreference: val });
+        console.log(this.state);
+    }
+
+    submitForm() {
+        localStorage.setItem("Business", JSON.stringify(this.state));
     }
 
     render() {
         return (
             <form>
-                <Name />
-                <Address />
-                <ACRANumber />
+                <ServiceVendorName updateName={this.updateName}/><br/>
+                <Address updateAddress={this.updateAddress}/><br />
                 <label>
-                    Pick your favorite flavor:
-                    <select value={this.state.value} onChange={this.handleChange}>
-                        <option value="grapefruit">Grapefruit</option>
-                        <option value="lime">Lime</option>
-                        <option value="coconut">Coconut</option>
-                        <option value="mango">Mango</option>
+                    UEN: &nbsp;
+                    <input name="aCRANumber" type="text" value={this.state.aCRANumber} onChange={this.handleChange} />
+                </label><br/>
+                <label>
+                    Company Size: &nbsp;
+                    <select name="employeeCount" value={this.state.employeeCount} onChange={this.handleChange}>
+                        <option value="Micro: Less than 10">&nbsp;Micro: Less than 10</option>
+                        <option value="Small: 10 - 49">&nbsp;Small: 10 - 49</option>
+                        <option value="Medium: 50 - 249">&nbsp;Medium: 50 - 249</option>
+                        <option value="Large: More than 249">&nbsp;Large: More than 249</option>
                     </select>
-                </label>
-                
+                </label><br />
+                <PaymentPreference updatePaymentPreference={this.updatePaymentPreference}/>
+                <hr />
+                <input type="submit" value="Submit" onClick={this.submitForm}/>
             </form>
         );
     }

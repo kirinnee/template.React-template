@@ -86,6 +86,2027 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@kirinnee/core/src/ArrayHelper.ts":
+/*!********************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/ArrayHelper.ts ***!
+  \********************************************************/
+/*! exports provided: KArrayHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KArrayHelper", function() { return KArrayHelper; });
+var KArrayHelper = /** @class */ (function () {
+    function KArrayHelper(check) {
+        this.check = check;
+    }
+    KArrayHelper.prototype.localeCompare = function (a, b) {
+        var map = ' _-,;:!?.\'"()[]{ }@*/\&#%`^+<=>|~$0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ';
+        var charA = '', charB = '', index = 0;
+        var s = a.length === b.length;
+        while (charA === charB && index < 100) {
+            charA = (s ? a : a.toLowerCase()).charAt(index);
+            charB = (s ? b : b.toLowerCase()).charAt(index);
+            index++;
+        }
+        return Math.max(-1, Math.min(1, map.indexOf(charA) - map.indexOf(charB)));
+    };
+    KArrayHelper.prototype.IsNumberArray = function (arr) {
+        if (Array.isArray(arr)) {
+            return arr.every(function (item) { return typeof item === "number"; });
+        }
+        return false;
+    };
+    KArrayHelper.prototype.IsStringArray = function (arr) {
+        if (Array.isArray(arr)) {
+            return arr.every(function (item) { return typeof item === "string"; });
+        }
+        return false;
+    };
+    KArrayHelper.prototype.IsBooleanArray = function (arr) {
+        if (Array.isArray(arr)) {
+            return arr.every(function (item) { return typeof item === "boolean"; });
+        }
+        return false;
+    };
+    KArrayHelper.prototype.FilterEmptyString = function (arr) {
+        return this.Where(arr, function (s) { return s.trim() !== ""; });
+    };
+    KArrayHelper.prototype.TrimAll = function (arr) {
+        return this.Each(arr, function (s) { return s.trim(); });
+    };
+    KArrayHelper.prototype.Sort = function (arr, type, Definier) {
+        var _this = this;
+        if (type.AscendingNumerical) {
+            if (this.IsNumberArray(arr)) {
+                arr.sort(function (a, b) { return a > b ? 1 : -1; });
+                return arr;
+            }
+            else {
+                if (this.check.IsNil(Definier)) {
+                    throw new Error("For non numbers, please input a function generates a number that represents the object");
+                }
+                else {
+                    arr.sort(function (a, b) { return Definier(a) > Definier(b) ? 1 : -1; });
+                    return arr;
+                }
+            }
+        }
+        else if (type.DescendingNumerical) {
+            if (this.IsNumberArray(arr)) {
+                arr.sort(function (a, b) { return a < b ? 1 : -1; });
+                return arr;
+            }
+            else {
+                if (this.check.IsNil(Definier)) {
+                    throw new Error("For non numbers, please input a function generates a number that represents the object");
+                }
+                else {
+                    arr.sort(function (a, b) { return Definier(a) < Definier(b) ? 1 : -1; });
+                    return arr;
+                }
+            }
+        }
+        else if (type.AtoZ) {
+            if (this.IsStringArray(arr)) {
+                var sArr = arr;
+                sArr.sort(function (a, b) { return _this.localeCompare(a, b); });
+                return arr;
+            }
+            else {
+                if (this.check.IsNil(Definier)) {
+                    throw new Error("For non strings, please input a function generates a string that represents the object");
+                }
+                else {
+                    arr.sort(function (a, b) { return _this.localeCompare(Definier(a), Definier(b)); });
+                    return arr;
+                }
+            }
+        }
+        else if (type.ZtoA) {
+            if (this.IsStringArray(arr)) {
+                var sArr = arr;
+                sArr.sort(function (a, b) { return -(_this.localeCompare(a, b)); });
+                return arr;
+            }
+            else {
+                if (this.check.IsNil(Definier)) {
+                    throw new Error("For non strings, please input a function generates a string that represents the object");
+                }
+                else {
+                    arr.sort(function (a, b) { return -_this.localeCompare(Definier(a), Definier(b)); });
+                    return arr;
+                }
+            }
+        }
+        else {
+            throw new Error("This place should never be reached!");
+        }
+    };
+    KArrayHelper.prototype.Reverse = function (arr) {
+        var ret = [];
+        for (var i = arr.length - 1; i >= 0; i--) {
+            ret.push(arr[i]);
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.FilterNil = function (arr) {
+        var _this = this;
+        return this.Where(arr, function (s) { return !_this.check.IsNil(s); });
+    };
+    KArrayHelper.prototype.Contains = function (arr, search) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] === search) {
+                return true;
+            }
+        }
+        return false;
+    };
+    KArrayHelper.prototype.DeepContains = function (arr, search) {
+        var c = this.check;
+        for (var i = 0; i < arr.length; i++) {
+            if (c.DeepEqual(arr[i], search)) {
+                return true;
+            }
+        }
+        return false;
+    };
+    KArrayHelper.prototype.Where = function (arr, predicate) {
+        var ret = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (predicate(arr[i], i)) {
+                ret.push(arr[i]);
+            }
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.Each = function (arr, application) {
+        var ret = [];
+        for (var i = 0; i < arr.length; i++) {
+            ret.push(application(arr[i], i));
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.Every = function (arr, application) {
+        var ret = [];
+        for (var i = 0; i < arr.length; i++) {
+            application(arr[i], i);
+            ret.push(arr[i]);
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.RemoveValue = function (arr, target) {
+        return this.Where(arr, function (s) { return s !== target; });
+    };
+    KArrayHelper.prototype.DeepRemoveValue = function (arr, target) {
+        var _this = this;
+        return this.Where(arr, function (s) { return !_this.check.DeepEqual(s, target); });
+    };
+    KArrayHelper.prototype.Without = function (arr, w) {
+        var _this = this;
+        return this.Where(arr, function (s) { return !_this.Contains(w, s); });
+    };
+    KArrayHelper.prototype.DeepWithout = function (arr, w) {
+        var _this = this;
+        return this.Where(arr, function (s) { return !_this.DeepContains(w, s); });
+    };
+    KArrayHelper.prototype.Populate = function (arr, defV, amount) {
+        for (var i = 0; i < amount; i++) {
+            arr.push(defV);
+        }
+        return arr;
+    };
+    KArrayHelper.prototype.Fill = function (arr, amount, fillFunction) {
+        for (var i = 0; i < amount; i++) {
+            arr.push(fillFunction(i));
+        }
+        return arr;
+    };
+    KArrayHelper.prototype.WithoutIndex = function (arr, w) {
+        var _this = this;
+        return this.Where(arr, function (e, i) { return !_this.Contains(w, i); });
+    };
+    KArrayHelper.prototype.RemoveIndex = function (arr, index) {
+        return this.Where(arr, function (e, i) { return i !== index; });
+    };
+    KArrayHelper.prototype.RemoveLast = function (arr) {
+        var ret = [];
+        for (var i = 0; i < arr.length - 1; i++) {
+            ret.push(arr[i]);
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.Take = function (arr, val) {
+        var ret = [];
+        var size = Math.min(val, arr.length);
+        for (var i = 0; i < size; i++) {
+            ret.push(arr[i]);
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.TakeLast = function (arr, val) {
+        var ret = [];
+        var start = Math.max(0, arr.length - val);
+        for (var i = start; i < arr.length; i++) {
+            ret.push(arr[i]);
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.Skip = function (arr, val) {
+        var x = [];
+        for (var i = val; i < arr.length; i++) {
+            x.push(arr[i]);
+        }
+        return x;
+    };
+    KArrayHelper.prototype.Cut = function (arr, val) {
+        var ret = [];
+        var size = Math.max(0, arr.length - val);
+        for (var i = 0; i < size; i++) {
+            ret.push(arr[i]);
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.FirstIndexOf = function (arr, search) {
+        return arr.indexOf(search);
+    };
+    KArrayHelper.prototype.DeepFirstIndexOf = function (arr, search) {
+        var _this = this;
+        return arr.findIndex(function (s) { return _this.check.DeepEqual(s, search); });
+    };
+    KArrayHelper.prototype.Count = function (arr, search) {
+        return this.Where(arr, function (s) { return s === search; }).length;
+    };
+    KArrayHelper.prototype.DeepCount = function (arr, search) {
+        var _this = this;
+        return this.Where(arr, function (s) { return _this.check.DeepEqual(search, s); }).length;
+    };
+    KArrayHelper.prototype.Indexes = function (arr, search) {
+        var index = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] === search) {
+                index.push(i);
+            }
+        }
+        return index;
+    };
+    KArrayHelper.prototype.DeepIndexes = function (arr, search) {
+        var index = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (this.check.DeepEqual(arr[i], search)) {
+                index.push(i);
+            }
+        }
+        return index;
+    };
+    KArrayHelper.prototype.Unique = function (arr) {
+        var _this = this;
+        return this.Where(arr, function (e, i) { return _this.FirstIndexOf(arr, e) === i; });
+    };
+    KArrayHelper.prototype.DeepUnique = function (arr) {
+        var _this = this;
+        return this.Where(arr, function (e, i) { return _this.DeepFirstIndexOf(arr, e) === i; });
+    };
+    KArrayHelper.prototype.Union = function (arr, target) {
+        var _this = this;
+        return this.Unique(arr).concat(this.Where(target, function (e) { return !_this.Contains(arr, e); }));
+    };
+    KArrayHelper.prototype.DeepUnion = function (arr, target) {
+        var _this = this;
+        return this.DeepUnique(arr).concat(this.Where(target, function (e) { return !_this.DeepContains(arr, e); }));
+    };
+    KArrayHelper.prototype.Intersect = function (arr, target) {
+        var _this = this;
+        return this.Where(this.Unique(arr), function (e) { return _this.Contains(target, e); });
+    };
+    KArrayHelper.prototype.DeepIntersect = function (arr, target) {
+        var _this = this;
+        return this.Where(this.DeepUnique(arr), function (e) { return _this.DeepContains(target, e); });
+    };
+    KArrayHelper.prototype.Outer = function (arr, target) {
+        var ret = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (!this.Contains(target, arr[i])) {
+                ret.push(arr[i]);
+            }
+        }
+        for (var i = 0; i < target.length; i++) {
+            if (!this.Contains(arr, target[i])) {
+                ret.push(target[i]);
+            }
+        }
+        return this.Unique(ret);
+    };
+    KArrayHelper.prototype.DeepOuter = function (arr, target) {
+        var ret = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (!this.DeepContains(target, arr[i])) {
+                ret.push(arr[i]);
+            }
+        }
+        for (var i = 0; i < target.length; i++) {
+            if (!this.DeepContains(arr, target[i])) {
+                ret.push(target[i]);
+            }
+        }
+        return this.DeepUnique(ret);
+    };
+    KArrayHelper.prototype.LeftExclusive = function (arr, target) {
+        var ret = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (!this.Contains(target, arr[i])) {
+                ret.push(arr[i]);
+            }
+        }
+        return this.Unique(ret);
+    };
+    KArrayHelper.prototype.DeepLeftExclusive = function (arr, target) {
+        var ret = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (!this.DeepContains(target, arr[i])) {
+                ret.push(arr[i]);
+            }
+        }
+        return this.DeepUnique(ret);
+    };
+    KArrayHelper.prototype.RightExclusive = function (arr, target) {
+        var ret = [];
+        for (var i = 0; i < target.length; i++) {
+            if (!this.Contains(arr, target[i])) {
+                ret.push(target[i]);
+            }
+        }
+        return this.Unique(ret);
+    };
+    KArrayHelper.prototype.DeepRightExclusive = function (arr, target) {
+        var ret = [];
+        for (var i = 0; i < target.length; i++) {
+            if (!this.DeepContains(arr, target[i])) {
+                ret.push(target[i]);
+            }
+        }
+        return this.DeepUnique(ret);
+    };
+    KArrayHelper.prototype.MergeAsMap = function (keys, values) {
+        if (keys.length !== values.length)
+            throw "Array has to be same length";
+        var map = new Map();
+        for (var i = 0; i < keys.length; i++) {
+            map.set(keys[i], values[i]);
+        }
+        return map;
+    };
+    KArrayHelper.prototype.UseAsKeyForMap = function (keys, valueFunction) {
+        var map = new Map();
+        for (var i = 0; i < keys.length; i++) {
+            map.set(keys[i], valueFunction(keys[i], i));
+        }
+        return map;
+    };
+    KArrayHelper.prototype.UseAsValueForMap = function (values, keyFunction) {
+        var map = new Map();
+        for (var i = 0; i < values.length; i++) {
+            map.set(keyFunction(values[i], i), values[i]);
+        }
+        return map;
+    };
+    KArrayHelper.prototype.Flatten = function (values) {
+        var ret = [];
+        for (var i = 0; i < values.length; i++) {
+            ret = ret.concat(values[i]);
+        }
+        return ret;
+    };
+    KArrayHelper.prototype.IsExtended = function () {
+        return typeof Array.prototype.IsNumberArray === "function" && typeof Array.prototype.DeepUnion === "function";
+    };
+    KArrayHelper.prototype.ExtendPrimitives = function () {
+        var c = this;
+        Array.prototype.IsNumberArray = function () {
+            return c.IsNumberArray(this);
+        };
+        Array.prototype.IsStringArray = function () {
+            return c.IsStringArray(this);
+        };
+        Array.prototype.IsBooleanArray = function () {
+            return c.IsBooleanArray(this);
+        };
+        Array.prototype.FilterEmptyString = function () {
+            return c.FilterEmptyString(this);
+        };
+        Array.prototype.TrimAll = function () {
+            return c.TrimAll(this);
+        };
+        Array.prototype.Sort = function (type, Definier) {
+            return c.Sort(this, type, Definier);
+        };
+        Array.prototype.Reverse = function () {
+            return c.Reverse(this);
+        };
+        Array.prototype.FilterNil = function () {
+            return c.FilterNil(this);
+        };
+        Array.prototype.Contains = function (target) {
+            return c.Contains(this, target);
+        };
+        Array.prototype.DeepContains = function (target) {
+            return c.DeepContains(this, target);
+        };
+        Array.prototype.Where = function (predicate) {
+            return c.Where(this, predicate);
+        };
+        Array.prototype.Each = function (application) {
+            return c.Each(this, application);
+        };
+        Array.prototype.Every = function (application) {
+            return c.Every(this, application);
+        };
+        Array.prototype.RemoveValue = function (target) {
+            return c.RemoveValue(this, target);
+        };
+        Array.prototype.DeepRemoveValue = function (target) {
+            return c.DeepRemoveValue(this, target);
+        };
+        Array.prototype.Without = function (arr) {
+            return c.Without(this, arr);
+        };
+        Array.prototype.DeepWithout = function (arr) {
+            return c.DeepWithout(this, arr);
+        };
+        Array.prototype.WithoutIndex = function (w) {
+            return c.WithoutIndex(this, w);
+        };
+        Array.prototype.Populate = function (defV, amt) {
+            return c.Populate(this, defV, amt);
+        };
+        Array.prototype.Fill = function (amt, fillFunction) {
+            return c.Fill(this, amt, fillFunction);
+        };
+        Array.prototype.RemoveIndex = function (index) {
+            return c.RemoveIndex(this, index);
+        };
+        Array.prototype.RemoveLast = function () {
+            return c.RemoveLast(this);
+        };
+        Array.prototype.Take = function (val) {
+            return c.Take(this, val);
+        };
+        Array.prototype.TakeLast = function (val) {
+            return c.TakeLast(this, val);
+        };
+        Array.prototype.Skip = function (val) {
+            return c.Skip(this, val);
+        };
+        Array.prototype.Cut = function (val) {
+            return c.Cut(this, val);
+        };
+        Array.prototype.FirstIndexOf = function (target) {
+            return c.FirstIndexOf(this, target);
+        };
+        Array.prototype.DeepFirstIndexOf = function (target) {
+            return c.DeepFirstIndexOf(this, target);
+        };
+        Array.prototype.Count = function (target) {
+            return c.Count(this, target);
+        };
+        Array.prototype.DeepCount = function (target) {
+            return c.DeepCount(this, target);
+        };
+        Array.prototype.Indexes = function (target) {
+            return c.Indexes(this, target);
+        };
+        Array.prototype.DeepIndexes = function (target) {
+            return c.DeepIndexes(this, target);
+        };
+        Array.prototype.Unique = function () {
+            return c.Unique(this);
+        };
+        Array.prototype.DeepUnique = function () {
+            return c.DeepUnique(this);
+        };
+        Array.prototype.Intersect = function (arr) {
+            return c.Intersect(this, arr);
+        };
+        Array.prototype.DeepIntersect = function (arr) {
+            return c.DeepIntersect(this, arr);
+        };
+        Array.prototype.Union = function (arr) {
+            return c.Union(this, arr);
+        };
+        Array.prototype.DeepUnion = function (arr) {
+            return c.DeepUnion(this, arr);
+        };
+        Array.prototype.Outer = function (arr) {
+            return c.Outer(this, arr);
+        };
+        Array.prototype.DeepOuter = function (arr) {
+            return c.DeepOuter(this, arr);
+        };
+        Array.prototype.LeftExclusive = function (arr) {
+            return c.LeftExclusive(this, arr);
+        };
+        Array.prototype.DeepLeftExclusive = function (arr) {
+            return c.DeepLeftExclusive(this, arr);
+        };
+        Array.prototype.RightExclusive = function (arr) {
+            return c.RightExclusive(this, arr);
+        };
+        Array.prototype.DeepRightExclusive = function (arr) {
+            return c.DeepRightExclusive(this, arr);
+        };
+        Array.prototype.MergeAsMap = function (values) {
+            return c.MergeAsMap(this, values);
+        };
+        Array.prototype.UseAsKeyForMap = function (valueFunction) {
+            return c.UseAsKeyForMap(this, valueFunction);
+        };
+        Array.prototype.UseAsValueForMap = function (keyFunction) {
+            return c.UseAsValueForMap(this, keyFunction);
+        };
+    };
+    return KArrayHelper;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/CheckHelper.ts":
+/*!********************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/CheckHelper.ts ***!
+  \********************************************************/
+/*! exports provided: KCheckHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KCheckHelper", function() { return KCheckHelper; });
+var KCheckHelper = /** @class */ (function () {
+    function KCheckHelper() {
+    }
+    KCheckHelper.prototype.IsExtended = function () {
+        return true;
+    };
+    KCheckHelper.prototype.ExtendPrimitives = function (safe) {
+        var k = this;
+        String.prototype.IsNil = function () {
+            return k.IsNil(this);
+        };
+        String.prototype.IsNull = function () {
+            return k.IsNull(this);
+        };
+        String.prototype.IsUndefined = function () {
+            return k.IsUndefined(this);
+        };
+        String.prototype.IsAnyString = function () {
+            return k.IsAnyString(this);
+        };
+        String.prototype.IsString = function () {
+            return k.IsString(this);
+        };
+        String.prototype.IsAnyNumber = function () {
+            return k.IsAnyNumber(this);
+        };
+        String.prototype.IsNumber = function () {
+            return k.IsNumber(this);
+        };
+        String.prototype.DeepEqual = function (b) {
+            return k.DeepEqual(this, b);
+        };
+        Array.prototype.IsNil = function () {
+            return k.IsNil(this);
+        };
+        Array.prototype.IsNull = function () {
+            return k.IsNull(this);
+        };
+        Array.prototype.IsUndefined = function () {
+            return k.IsUndefined(this);
+        };
+        Array.prototype.IsAnyString = function () {
+            return k.IsAnyString(this);
+        };
+        Array.prototype.IsString = function () {
+            return k.IsString(this);
+        };
+        Array.prototype.IsAnyNumber = function () {
+            return k.IsAnyNumber(this);
+        };
+        Array.prototype.IsNumber = function () {
+            return k.IsNumber(this);
+        };
+        Array.prototype.DeepEqual = function (b) {
+            return k.DeepEqual(this, b);
+        };
+        Map.prototype.IsNil = function () {
+            return k.IsNil(this);
+        };
+        Map.prototype.IsNull = function () {
+            return k.IsNull(this);
+        };
+        Map.prototype.IsUndefined = function () {
+            return k.IsUndefined(this);
+        };
+        Map.prototype.IsAnyString = function () {
+            return k.IsAnyString(this);
+        };
+        Map.prototype.IsString = function () {
+            return k.IsString(this);
+        };
+        Map.prototype.IsAnyNumber = function () {
+            return k.IsAnyNumber(this);
+        };
+        Map.prototype.IsNumber = function () {
+            return k.IsNumber(this);
+        };
+        Map.prototype.DeepEqual = function (b) {
+            return k.DeepEqual(this, b);
+        };
+        Number.prototype.IsNil = function () {
+            return k.IsNil(this);
+        };
+        Number.prototype.IsNull = function () {
+            return k.IsNull(this);
+        };
+        Number.prototype.IsUndefined = function () {
+            return k.IsUndefined(this);
+        };
+        Number.prototype.IsAnyString = function () {
+            return k.IsAnyString(this);
+        };
+        Number.prototype.IsString = function () {
+            return k.IsString(this);
+        };
+        Number.prototype.IsAnyNumber = function () {
+            return k.IsAnyNumber(this);
+        };
+        Number.prototype.IsNumber = function () {
+            return k.IsNumber(this);
+        };
+        Number.prototype.DeepEqual = function (b) {
+            return k.DeepEqual(this, b);
+        };
+        Boolean.prototype.IsNil = function () {
+            return k.IsNil(this);
+        };
+        Boolean.prototype.IsNull = function () {
+            return k.IsNull(this);
+        };
+        Boolean.prototype.IsUndefined = function () {
+            return k.IsUndefined(this);
+        };
+        Boolean.prototype.IsAnyString = function () {
+            return k.IsAnyString(this);
+        };
+        Boolean.prototype.IsString = function () {
+            return k.IsString(this);
+        };
+        Boolean.prototype.IsAnyNumber = function () {
+            return k.IsAnyNumber(this);
+        };
+        Boolean.prototype.IsNumber = function () {
+            return k.IsNumber(this);
+        };
+        Boolean.prototype.DeepEqual = function (b) {
+            return k.DeepEqual(this, b);
+        };
+    };
+    KCheckHelper.prototype.IsNil = function (any) {
+        return this.IsNull(any) || this.IsUndefined(any);
+    };
+    KCheckHelper.prototype.IsNull = function (any) {
+        return any === null;
+    };
+    KCheckHelper.prototype.IsUndefined = function (any) {
+        return typeof any === "undefined";
+    };
+    KCheckHelper.prototype.IsAnyString = function (any) {
+        if (this.IsNil(any))
+            return false;
+        return typeof any === "string" || any instanceof String;
+    };
+    KCheckHelper.prototype.IsString = function (any) {
+        if (!this.IsAnyString(any))
+            return false;
+        var s = any;
+        return s.trim() !== "";
+    };
+    KCheckHelper.prototype.IsAnyNumber = function (any) {
+        if (this.IsNil(any))
+            return false;
+        return typeof any === "number" || any instanceof Number ?
+            !isNaN(any)
+            : this.IsString(any) ? this.IsAnyNumber(parseFloat(any)) : false;
+    };
+    KCheckHelper.prototype.IsNumber = function (any) {
+        if (!this.IsAnyNumber(any))
+            return false;
+        if (this.IsAnyString(any)) {
+            var s = any;
+            var n = parseFloat(s);
+            return !isNaN(n) && isFinite(n);
+        }
+        else {
+            var n = any;
+            return !isNaN(n) && isFinite(n);
+        }
+    };
+    KCheckHelper.prototype.DeepEqual = function (a, b) {
+        var check = this;
+        if (a === b)
+            return true;
+        if (a === undefined && b !== undefined || a !== undefined && b === undefined)
+            return false;
+        if (a === null && b !== null || a !== null && b === null)
+            return false;
+        if (typeof a !== typeof b)
+            return false;
+        if (typeof a === "string" && typeof b === "string")
+            return new String(a) === new String(b);
+        if (typeof a === "number" && typeof b === "number")
+            return isNaN(a) ? isNaN(b) : a === b;
+        if (typeof a === "boolean" && typeof b === "boolean")
+            return a === b;
+        if (a instanceof Date)
+            return a.valueOf() === b.valueOf();
+        if (a.constructor !== b.constructor)
+            return false;
+        if (a instanceof Function)
+            return a.toString() === b.toString();
+        if (a instanceof RegExp) {
+            if (!(b instanceof RegExp))
+                return false;
+            return a.toString() === b.toString();
+        }
+        if (Array.isArray(a)) {
+            if (!Array.isArray(b))
+                return false;
+            if (a.length !== b.length)
+                return false;
+        }
+        if (!(a instanceof Object)) {
+            return false;
+        }
+        if (!(b instanceof Object)) {
+            return false;
+        }
+        // recursive object equality check
+        var p = Object.keys(a);
+        return Object.keys(b).every(function (i) { return p.indexOf(i) !== -1; }) &&
+            p.every(function (i) { return check.DeepEqual(a[i], b[i]); });
+    };
+    return KCheckHelper;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/FileHelper.ts":
+/*!*******************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/FileHelper.ts ***!
+  \*******************************************************/
+/*! exports provided: KFileHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KFileHelper", function() { return KFileHelper; });
+var KFileHelper = /** @class */ (function () {
+    function KFileHelper(check) {
+        this.check = check;
+    }
+    KFileHelper.prototype.fileCheck = function (path) {
+        if (!this.IsFile(path))
+            throw new Error("input path needs to be a legit file format, requies extension. Files with extension (i.e dockerfile) will not be treated as acceptable file format: " + path);
+    };
+    KFileHelper.prototype.IsFile = function (path) {
+        if (!this.check.IsString(path))
+            return false;
+        var s = path;
+        if (s.charAt(0) === ".")
+            return true;
+        return s.split('.').length > 1;
+    };
+    KFileHelper.prototype.HasDirectory = function (path) {
+        this.fileCheck(path);
+        return path.split("/").length > 1;
+    };
+    KFileHelper.prototype.GetExtension = function (path) {
+        this.fileCheck(path);
+        return "." + path.split(".").pop();
+    };
+    KFileHelper.prototype.GetFileName = function (path) {
+        this.fileCheck(path);
+        var arr = path.split(".");
+        arr.pop();
+        return arr.join(".").split("/").pop();
+    };
+    KFileHelper.prototype.GetDirectory = function (path) {
+        this.fileCheck(path);
+        if (!this.HasDirectory(path))
+            return "";
+        var arr = path.split(".");
+        arr.pop();
+        var arr2 = arr.join(".").split("/");
+        arr2.pop();
+        return this.FormatAsDirectory(arr2.join("/"));
+    };
+    KFileHelper.prototype.ChangeExtension = function (path, replacement) {
+        this.fileCheck(path);
+        var dir = this.GetDirectory(path);
+        var name = this.GetFileName(path);
+        if (replacement.charAt(0) === ".") {
+            replacement = replacement.substr(1);
+        }
+        var fDir = this.FormatAsDirectory(dir);
+        var fFile = name + "." + replacement;
+        return fDir + this.FormatAsFile(fFile);
+    };
+    KFileHelper.prototype.ModifiyExtension = function (path, modify) {
+        this.fileCheck(path);
+        var ext = this.GetExtension(path).substr(1);
+        var newExt = modify(ext);
+        return this.ChangeExtension(path, newExt);
+    };
+    KFileHelper.prototype.ChangeName = function (path, replacement) {
+        this.fileCheck(path);
+        var ext = this.GetExtension(path);
+        var dir = this.FormatAsDirectory(this.GetDirectory(path));
+        if (replacement.charAt(0) === "/") {
+            replacement = replacement.substr(1);
+        }
+        if (replacement.charAt(replacement.length - 1) === ".") {
+            replacement = replacement.substr(0, replacement.length - 1);
+        }
+        return this.FormatAsFile(dir + replacement + ext);
+    };
+    KFileHelper.prototype.ModifiyName = function (path, modify) {
+        this.fileCheck(path);
+        var name = this.GetFileName(path);
+        var newName = modify(name);
+        return this.ChangeName(path, newName);
+    };
+    KFileHelper.prototype.ChangeDirectory = function (path, replacement) {
+        this.fileCheck(path);
+        var file = path.split("/").pop();
+        return this.FormatAsFile(this.FormatAsDirectory(replacement) + this.FormatAsFile(file));
+    };
+    KFileHelper.prototype.ModifyDirectory = function (path, modify) {
+        this.fileCheck(path);
+        var dir = this.GetDirectory(path);
+        var newDir = modify(dir);
+        return this.ChangeDirectory(path, newDir);
+    };
+    KFileHelper.prototype.FormatAsDirectory = function (string) {
+        if (!this.check.IsAnyString(string))
+            throw new Error("directory cannot be empty");
+        if (string.charAt(0) === "/") {
+            string = string.substr(1);
+        }
+        if (string.charAt(string.length - 1) !== "/") {
+            string += "/";
+        }
+        return string;
+    };
+    KFileHelper.prototype.FormatAsFile = function (string) {
+        this.fileCheck(string);
+        if (string.charAt(0) === "/") {
+            string = string.substr(1);
+        }
+        return string;
+    };
+    KFileHelper.prototype.IsExtended = function () {
+        return typeof String.prototype.IsFile === "function" && typeof Array.prototype.IsFile === "function" && typeof String.prototype.FormatAsFile === "function";
+    };
+    KFileHelper.prototype.ExtendPrimitives = function (safe) {
+        var k = this;
+        String.prototype.IsFile = function () {
+            return k.IsFile(this);
+        };
+        Array.prototype.IsFile = function () {
+            return k.IsFile(this);
+        };
+        Map.prototype.IsFile = function () {
+            return k.IsFile(this);
+        };
+        Number.prototype.IsFile = function () {
+            return k.IsFile(this);
+        };
+        Boolean.prototype.IsFile = function () {
+            return k.IsFile(this);
+        };
+        String.prototype.HasDirectory = function () {
+            return k.HasDirectory(this);
+        };
+        String.prototype.GetExtension = function () {
+            return k.GetExtension(this);
+        };
+        String.prototype.GetFileName = function () {
+            return k.GetFileName(this);
+        };
+        String.prototype.GetDirectory = function () {
+            return k.GetDirectory(this);
+        };
+        String.prototype.ChangeExtension = function (replacement) {
+            return k.ChangeExtension(this, replacement);
+        };
+        String.prototype.ModifiyExtension = function (modify) {
+            return k.ModifiyExtension(this, modify);
+        };
+        String.prototype.ChangeName = function (replacement) {
+            return k.ChangeName(this, replacement);
+        };
+        String.prototype.ModifiyName = function (modify) {
+            return k.ModifiyName(this, modify);
+        };
+        String.prototype.ChangeDirectory = function (replacement) {
+            return k.ChangeDirectory(this, replacement);
+        };
+        String.prototype.ModifyDirectory = function (modify) {
+            return k.ModifyDirectory(this, modify);
+        };
+        String.prototype.FormatAsDirectory = function () {
+            return k.FormatAsDirectory(this);
+        };
+        String.prototype.FormatAsFile = function () {
+            return k.FormatAsFile(this);
+        };
+    };
+    return KFileHelper;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/HTMLHelper.ts":
+/*!*******************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/HTMLHelper.ts ***!
+  \*******************************************************/
+/*! exports provided: KHTMLHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KHTMLHelper", function() { return KHTMLHelper; });
+var KHTMLHelper = /** @class */ (function () {
+    function KHTMLHelper(check, arr) {
+        this.SPACE = "&nbsp;";
+        this.LEFT_TAG = "&lt;";
+        this.RIGHT_TAG = "&gt;";
+        this.AMPERSAND = "&amp;";
+        this.SINGLE_QUOTE = "&#39;";
+        this.DOUBLE_QUOTE = "&quot;";
+        this.check = check;
+        this.arr = arr;
+    }
+    KHTMLHelper.prototype.EscapeHTML = function (input, space) {
+        var nString = "";
+        for (var i = 0; i < input.length; i++) {
+            nString += this.EscapeCharacter(input.charAt(i), space);
+        }
+        return nString;
+    };
+    KHTMLHelper.prototype.EscapeCharacter = function (input, space) {
+        if (input.length > 1) {
+            throw new Error("Only can escape characters. String cannot be longer than 1");
+        }
+        switch (input) {
+            case "&": return this.AMPERSAND;
+            case "<": return this.LEFT_TAG;
+            case ">": return this.RIGHT_TAG;
+            case "'": return this.SINGLE_QUOTE;
+            case '"': return this.DOUBLE_QUOTE;
+            case " ": return space ? this.SPACE : input;
+            default: return input;
+        }
+    };
+    KHTMLHelper.prototype.BreakIntoArray = function (input, cArr) {
+        cArr = this.check.IsNil(cArr) ? [] : cArr;
+        if (input.length === 0) {
+            return cArr;
+        }
+        var f = input.charAt(0);
+        if (f !== "&") {
+            cArr.push(f);
+            return this.BreakIntoArray(input.substr(1), cArr);
+        }
+        else {
+            var six = input.substr(0, 6);
+            if (six === this.SPACE) {
+                cArr.push(this.SPACE);
+                return this.BreakIntoArray(input.substr(6), cArr);
+            }
+            if (six === this.DOUBLE_QUOTE) {
+                cArr.push(this.DOUBLE_QUOTE);
+                return this.BreakIntoArray(input.substr(6), cArr);
+            }
+            var five = input.substr(0, 5);
+            if (five === this.AMPERSAND) {
+                cArr.push(this.AMPERSAND);
+                return this.BreakIntoArray(input.substr(5), cArr);
+            }
+            if (five === this.SINGLE_QUOTE) {
+                cArr.push(this.SINGLE_QUOTE);
+                return this.BreakIntoArray(input.substr(5), cArr);
+            }
+            var four = input.substr(0, 4);
+            if (four === this.LEFT_TAG) {
+                cArr.push(this.LEFT_TAG);
+                return this.BreakIntoArray(input.substr(4), cArr);
+            }
+            if (four === this.RIGHT_TAG) {
+                cArr.push(this.RIGHT_TAG);
+                return this.BreakIntoArray(input.substr(4), cArr);
+            }
+            cArr.push(f);
+            return this.BreakIntoArray(input.substr(1), cArr);
+        }
+    };
+    KHTMLHelper.prototype.WrapIn = function (input, tag) {
+        return "<" + tag + ">" + input + "</" + tag + ">";
+    };
+    KHTMLHelper.prototype.RemoveURLVariable = function (input) {
+        var split = input.split('?');
+        return split.length === 1 ? input : this.arr.Cut(split, 1).join('?');
+    };
+    KHTMLHelper.prototype.IsExtended = function () {
+        return typeof String.prototype.EscapeCharacter === "function" && typeof String.prototype.WrapIn === "function";
+    };
+    KHTMLHelper.prototype.ExtendPrimitives = function () {
+        var h = this;
+        String.prototype.EscapeCharacter = function (space) {
+            return h.EscapeCharacter(this, space);
+        };
+        String.prototype.EscapeHTML = function (space) {
+            return h.EscapeHTML(this, space);
+        };
+        String.prototype.BreakIntoArray = function () {
+            return h.BreakIntoArray(this);
+        };
+        String.prototype.WrapIn = function (tag) {
+            return h.WrapIn(this, tag);
+        };
+        String.prototype.RemoveURLVariable = function () {
+            return h.RemoveURLVariable(this);
+        };
+    };
+    return KHTMLHelper;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/Kore.ts":
+/*!*************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/Kore.ts ***!
+  \*************************************************/
+/*! exports provided: Kore */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Kore", function() { return Kore; });
+/* harmony import */ var _CheckHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CheckHelper */ "./node_modules/@kirinnee/core/src/CheckHelper.ts");
+/* harmony import */ var _NumberHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NumberHelper */ "./node_modules/@kirinnee/core/src/NumberHelper.ts");
+/* harmony import */ var _ArrayHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ArrayHelper */ "./node_modules/@kirinnee/core/src/ArrayHelper.ts");
+/* harmony import */ var _StringHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StringHelper */ "./node_modules/@kirinnee/core/src/StringHelper.ts");
+/* harmony import */ var _HTMLHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./HTMLHelper */ "./node_modules/@kirinnee/core/src/HTMLHelper.ts");
+/* harmony import */ var _MapHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MapHelper */ "./node_modules/@kirinnee/core/src/MapHelper.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FileHelper */ "./node_modules/@kirinnee/core/src/FileHelper.ts");
+
+
+
+
+
+
+
+var Kore = /** @class */ (function () {
+    function Kore() {
+        this.Check = new _CheckHelper__WEBPACK_IMPORTED_MODULE_0__["KCheckHelper"]();
+        this.File = new _FileHelper__WEBPACK_IMPORTED_MODULE_6__["KFileHelper"](this.Check);
+        this.Number = new _NumberHelper__WEBPACK_IMPORTED_MODULE_1__["KNumberHelper"](this.Check);
+        this.Array = new _ArrayHelper__WEBPACK_IMPORTED_MODULE_2__["KArrayHelper"](this.Check);
+        this.String = new _StringHelper__WEBPACK_IMPORTED_MODULE_3__["KStringHelper"](this.Check, this.Array);
+        this.HTML = new _HTMLHelper__WEBPACK_IMPORTED_MODULE_4__["KHTMLHelper"](this.Check, this.Array);
+        this.Map = new _MapHelper__WEBPACK_IMPORTED_MODULE_5__["KMapHelper"](this.Check, this.Array);
+    }
+    Object.defineProperty(Kore.prototype, "IsExtended", {
+        get: function () {
+            return this.Check.IsExtended()
+                && this.File.IsExtended()
+                && this.Number.IsExtended()
+                && this.Array.IsExtended()
+                && this.String.IsExtended()
+                && this.HTML.IsExtended()
+                && this.Map.IsExtended();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Kore.prototype.ExtendPrimitives = function (safe) {
+        this.File.ExtendPrimitives(safe);
+        this.Check.ExtendPrimitives(safe);
+        this.Number.ExtendPrimitives(safe);
+        this.String.ExtendPrimitives(safe);
+        this.Array.ExtendPrimitives(safe);
+        this.Map.ExtendPrimitives(safe);
+        this.HTML.ExtendPrimitives(safe);
+    };
+    return Kore;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/MapHelper.ts":
+/*!******************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/MapHelper.ts ***!
+  \******************************************************/
+/*! exports provided: KMapHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KMapHelper", function() { return KMapHelper; });
+var KMapHelper = /** @class */ (function () {
+    function KMapHelper(check, arr) {
+        this.check = check;
+        this.arr = arr;
+    }
+    KMapHelper.prototype.FilterNilValue = function (map) {
+        var ret = new Map();
+        for (var _i = 0, _a = Array.from(map.entries()); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
+            var k = key;
+            var v = value;
+            if (!this.check.IsNil(v)) {
+                ret.set(k, v);
+            }
+        }
+        return ret;
+    };
+    KMapHelper.prototype.TrimValue = function (map) {
+        return this.EachValue(map, function (v) { return v.trim(); });
+    };
+    KMapHelper.prototype.FilterEmptyStringValue = function (map) {
+        return this.Where(map, function (k, v) { return v.trim().length > 0; });
+    };
+    KMapHelper.prototype.SortByKey = function (map, type, Definer) {
+        var c = this.check;
+        var array = Array.from(map);
+        if (type.AscendingNumerical || type.DescendingNumerical) {
+            var nAr = this.arr.Sort(array, type, function (i) {
+                var key = i["0"];
+                if (typeof key === "number") {
+                    return key;
+                }
+                else {
+                    if (c.IsNil(Definer)) {
+                        throw new Error("Non-number keys needs a conversion function");
+                    }
+                    else {
+                        return Definer(key);
+                    }
+                }
+            });
+            return new Map(nAr);
+        }
+        else {
+            var nAr = this.arr.Sort(array, type, function (i) {
+                var key = i["0"];
+                if (typeof key === "string") {
+                    return key;
+                }
+                else {
+                    if (c.IsNil(Definer)) {
+                        throw new Error("Non-string keys needs a conversion function");
+                    }
+                    else {
+                        return Definer(key);
+                    }
+                }
+            });
+            return new Map(nAr);
+        }
+    };
+    KMapHelper.prototype.SortByValue = function (map, type, Definer) {
+        var c = this.check;
+        var array = Array.from(map);
+        if (type.AscendingNumerical || type.DescendingNumerical) {
+            var nAr = this.arr.Sort(array, type, function (i) {
+                var key = i["1"];
+                if (typeof key === "number") {
+                    return key;
+                }
+                else {
+                    if (c.IsNil(Definer)) {
+                        throw new Error("Non-number values needs a conversion function");
+                    }
+                    else {
+                        return Definer(key);
+                    }
+                }
+            });
+            return new Map(nAr);
+        }
+        else {
+            var nAr = this.arr.Sort(array, type, function (i) {
+                var key = i["1"];
+                if (typeof key === "string") {
+                    return key;
+                }
+                else {
+                    if (c.IsNil(Definer)) {
+                        throw new Error("Non-string values needs a conversion function");
+                    }
+                    else {
+                        return Definer(key);
+                    }
+                }
+            });
+            return new Map(nAr);
+        }
+    };
+    KMapHelper.prototype.Reverse = function (map) {
+        return new Map(this.arr.Reverse(Array.from(map)));
+    };
+    KMapHelper.prototype.ContainsKey = function (map, search) {
+        return this.arr.Contains(Array.from(map.keys()), search);
+    };
+    KMapHelper.prototype.DeepContainsKey = function (map, search) {
+        return this.arr.DeepContains(Array.from(map.keys()), search);
+    };
+    KMapHelper.prototype.ContainsValue = function (map, search) {
+        return this.arr.Contains(Array.from(map.values()), search);
+    };
+    KMapHelper.prototype.DeepContainsValue = function (map, search) {
+        return this.arr.DeepContains(Array.from(map.values()), search);
+    };
+    KMapHelper.prototype.Where = function (map, predicate) {
+        var ret = new Map();
+        for (var _i = 0, _a = Array.from(map.entries()); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
+            var k = key;
+            var v = value;
+            if (predicate(k, v)) {
+                ret.set(k, v);
+            }
+        }
+        return ret;
+    };
+    KMapHelper.prototype.EachKey = function (map, transform) {
+        var ret = new Map();
+        for (var _i = 0, _a = Array.from(map.entries()); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
+            var k = key;
+            var v = value;
+            var nK = transform(k, v);
+            ret.set(nK, v);
+        }
+        return ret;
+    };
+    KMapHelper.prototype.EachValue = function (map, transform) {
+        var ret = new Map();
+        for (var _i = 0, _a = Array.from(map.entries()); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
+            var k = key;
+            var v = value;
+            var nV = transform(v, k);
+            ret.set(k, nV);
+        }
+        return ret;
+    };
+    KMapHelper.prototype.Each = function (map, transform) {
+        var ret = [];
+        for (var _i = 0, _a = Array.from(map.entries()); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
+            var k = key;
+            var v = value;
+            ret.push(transform(k, v));
+        }
+        return ret;
+    };
+    KMapHelper.prototype.Every = function (map, transform) {
+        var ret = new Map();
+        for (var _i = 0, _a = Array.from(map.entries()); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
+            var k = key;
+            var v = value;
+            transform(k, v);
+            ret.set(k, v);
+        }
+        return ret;
+    };
+    KMapHelper.prototype.RemoveKey = function (map, key) {
+        return this.Where(map, function (k) { return k !== key; });
+    };
+    KMapHelper.prototype.DeepRemoveKey = function (map, key) {
+        var _this = this;
+        return this.Where(map, function (k) { return !_this.check.DeepEqual(k, key); });
+    };
+    KMapHelper.prototype.RemoveValue = function (map, val) {
+        return this.Where(map, function (k, v) { return v !== val; });
+    };
+    KMapHelper.prototype.DeepRemoveValue = function (map, val) {
+        var _this = this;
+        return this.Where(map, function (k, v) { return !_this.check.DeepEqual(v, val); });
+    };
+    KMapHelper.prototype.WithoutKey = function (map, keys) {
+        var _this = this;
+        return this.Where(map, function (k) { return !_this.arr.Contains(keys, k); });
+    };
+    KMapHelper.prototype.DeepWithoutKey = function (map, keys) {
+        var _this = this;
+        return this.Where(map, function (k) { return !_this.arr.DeepContains(keys, k); });
+    };
+    KMapHelper.prototype.WithoutValue = function (map, vals) {
+        var _this = this;
+        return this.Where(map, function (k, v) { return !_this.arr.Contains(vals, v); });
+    };
+    KMapHelper.prototype.DeepWithoutValue = function (map, vals) {
+        var _this = this;
+        return this.Where(map, function (k, v) { return !_this.arr.DeepContains(vals, v); });
+    };
+    KMapHelper.prototype.Take = function (map, val) {
+        return new Map(this.arr.Take(Array.from(map.entries()), val));
+    };
+    KMapHelper.prototype.Skip = function (map, val) {
+        return new Map(this.arr.Skip(Array.from(map.entries()), val));
+    };
+    KMapHelper.prototype.Cut = function (map, val) {
+        return new Map(this.arr.Cut(Array.from(map.entries()), val));
+    };
+    KMapHelper.prototype.TakeLast = function (map, val) {
+        return new Map(this.arr.TakeLast(Array.from(map.entries()), val));
+    };
+    KMapHelper.prototype.ToArray = function (map) {
+        return Array.from(map.entries());
+    };
+    KMapHelper.prototype.IsExtended = function () {
+        return typeof Map.prototype.FilterNilValue === "function" && typeof Map.prototype.ToArray === "function";
+    };
+    KMapHelper.prototype.ExtendPrimitives = function () {
+        var k = this;
+        Map.prototype.FilterNilValue = function () {
+            return k.FilterNilValue(this);
+        };
+        Map.prototype.FilterEmptyStringValue = function () {
+            return k.FilterEmptyStringValue(this);
+        };
+        Map.prototype.TrimValue = function () {
+            return k.TrimValue(this);
+        };
+        Map.prototype.SortByKey = function (type, Definer) {
+            return k.SortByKey(this, type, Definer);
+        };
+        Map.prototype.SortByValue = function (type, Definer) {
+            return k.SortByValue(this, type, Definer);
+        };
+        Map.prototype.Reverse = function () {
+            return k.Reverse(this);
+        };
+        Map.prototype.ContainsKey = function (search) {
+            return k.ContainsKey(this, search);
+        };
+        Map.prototype.DeepContainsKey = function (search) {
+            return k.DeepContainsKey(this, search);
+        };
+        Map.prototype.ContainsValue = function (search) {
+            return k.ContainsValue(this, search);
+        };
+        Map.prototype.DeepContainsValue = function (search) {
+            return k.DeepContainsValue(this, search);
+        };
+        Map.prototype.Where = function (predicate) {
+            return k.Where(this, predicate);
+        };
+        Map.prototype.EachKey = function (transform) {
+            return k.EachKey(this, transform);
+        };
+        Map.prototype.EachValue = function (transform) {
+            return k.EachValue(this, transform);
+        };
+        Map.prototype.Each = function (transform) {
+            return k.Each(this, transform);
+        };
+        Map.prototype.Every = function (transform) {
+            return k.Every(this, transform);
+        };
+        Map.prototype.RemoveKey = function (key) {
+            return k.RemoveKey(this, key);
+        };
+        Map.prototype.DeepRemoveKey = function (key) {
+            return k.DeepRemoveKey(this, key);
+        };
+        Map.prototype.RemoveValue = function (val) {
+            return k.RemoveValue(this, val);
+        };
+        Map.prototype.DeepRemoveValue = function (val) {
+            return k.DeepRemoveValue(this, val);
+        };
+        Map.prototype.WithoutKey = function (keys) {
+            return k.WithoutKey(this, keys);
+        };
+        Map.prototype.DeepWithoutKey = function (keys) {
+            return k.DeepWithoutKey(this, keys);
+        };
+        Map.prototype.WithoutValue = function (vals) {
+            return k.WithoutValue(this, vals);
+        };
+        Map.prototype.DeepWithoutValue = function (vals) {
+            return k.DeepWithoutValue(this, vals);
+        };
+        Map.prototype.Take = function (val) {
+            return k.Take(this, val);
+        };
+        Map.prototype.Skip = function (val) {
+            return k.Skip(this, val);
+        };
+        Map.prototype.Cut = function (val) {
+            return k.Cut(this, val);
+        };
+        Map.prototype.TakeLast = function (val) {
+            return k.TakeLast(this, val);
+        };
+        Map.prototype.ToArray = function () {
+            return k.ToArray(this);
+        };
+    };
+    return KMapHelper;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/NumberHelper.ts":
+/*!*********************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/NumberHelper.ts ***!
+  \*********************************************************/
+/*! exports provided: KNumberHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KNumberHelper", function() { return KNumberHelper; });
+var KNumberHelper = /** @class */ (function () {
+    function KNumberHelper(check) {
+        this.check = check;
+    }
+    KNumberHelper.prototype.IsOdd = function (any) {
+        if (!this.IsInteger(any) || any === 0)
+            return false;
+        return any % 2 !== 0;
+    };
+    KNumberHelper.prototype.IsEven = function (any) {
+        if (!this.IsInteger(any) || any === 0)
+            return false;
+        return any % 2 === 0;
+    };
+    KNumberHelper.prototype.IsInteger = function (any) {
+        if (!this.check.IsNumber(any))
+            return false;
+        return Math.abs(any % 1) < 0.000000000000001;
+    };
+    KNumberHelper.prototype.IsFinite = function (any) {
+        if (!this.check.IsAnyNumber(any))
+            return false;
+        return isFinite(any);
+    };
+    KNumberHelper.prototype.IsInfinite = function (any) {
+        if (!this.check.IsAnyNumber(any))
+            return false;
+        return !isFinite(any);
+    };
+    KNumberHelper.prototype.IsNaN = function (any) {
+        return isNaN(any);
+    };
+    KNumberHelper.prototype.RoundOff = function (number) {
+        if (!this.check.IsAnyNumber(number))
+            throw Error("Cannot round NaN");
+        if (!this.IsFinite(number))
+            return number;
+        if (number < 0) {
+            return -Math.round(-number);
+        }
+        else {
+            return Math.round(number);
+        }
+    };
+    KNumberHelper.prototype.RoundDown = function (number) {
+        if (!this.check.IsAnyNumber(number))
+            throw Error("Cannot round NaN");
+        if (!this.IsFinite(number))
+            return number;
+        if (number < 0) {
+            return -Math.floor(-number);
+        }
+        else {
+            return Math.floor(number);
+        }
+    };
+    KNumberHelper.prototype.RoundUp = function (number) {
+        if (!this.check.IsAnyNumber(number))
+            throw Error("Cannot round NaN");
+        if (!this.IsFinite(number))
+            return number;
+        if (number < 0) {
+            return -Math.ceil(-number);
+        }
+        else {
+            return Math.ceil(number);
+        }
+    };
+    KNumberHelper.prototype.Absolute = function (number) {
+        if (!this.check.IsNumber(number))
+            throw new Error("Needs to be a proper number");
+        return Math.abs(number);
+    };
+    KNumberHelper.prototype.SquareRoot = function (number) {
+        if (!this.check.IsNumber(number))
+            throw new Error("Needs to be a proper number");
+        if (number < 0)
+            throw new Error("Cannot square root negative numbers");
+        return Math.sqrt(number);
+    };
+    KNumberHelper.prototype.ToInt = function (string) {
+        if (this.check.IsAnyString(string)) {
+            if (!this.check.IsNumber(string))
+                throw new Error("Cannot parse String into integer because string format is invalid");
+            return parseInt(string);
+        }
+        else {
+            if (!this.check.IsNumber(string))
+                throw new Error("Needs to be a proper number");
+            return Math.trunc(string);
+        }
+    };
+    KNumberHelper.prototype.ToFloat = function (string) {
+        if (this.check.IsAnyString(string)) {
+            if (!this.check.IsNumber(string))
+                throw new Error("Cannot parse String into float because string format is invalid");
+            return parseFloat(string);
+        }
+        else {
+            if (!this.check.IsNumber(string))
+                throw new Error("Needs to be a proper number");
+            return parseFloat(string);
+        }
+    };
+    KNumberHelper.prototype.AtMost = function (target, max) {
+        if (!this.check.IsNumber(target))
+            throw new Error("Needs to be a proper number");
+        return Math.min(target, max);
+    };
+    KNumberHelper.prototype.AtLeast = function (target, min) {
+        if (!this.check.IsNumber(target))
+            throw new Error("Needs to be a proper number");
+        return Math.max(target, min);
+    };
+    KNumberHelper.prototype.Clamp = function (target, constrain1, constrain2) {
+        if (!this.check.IsNumber(target))
+            throw new Error("Needs to be a proper number");
+        var max = Math.max(constrain1, constrain2);
+        var min = Math.min(constrain1, constrain2);
+        return Math.max(Math.min(target, max), min);
+    };
+    KNumberHelper.prototype.RandomTo = function (target, to, integer) {
+        if (integer === void 0) { integer = true; }
+        if (!this.check.IsNumber(target))
+            throw new Error("Needs to be a proper number");
+        if (integer) {
+            return Math.floor(target + Math.random() * (to - target + 1));
+        }
+        else {
+            return Math.min(target + Math.random() * (to - target + 1), to);
+        }
+    };
+    KNumberHelper.prototype.RandomFor = function (target, to, integer) {
+        if (!this.check.IsNumber(target))
+            throw new Error("Needs to be a proper number");
+        return this.RandomTo(target, target + to - 1, integer);
+    };
+    KNumberHelper.prototype.RandomAround = function (target, to, integer) {
+        if (!this.check.IsNumber(target))
+            throw new Error("Needs to be a proper number");
+        if (this.IsOdd(to)) {
+            var even = to - 1;
+            var half = even / 2;
+            return this.RandomTo(target - half, target + half, integer);
+        }
+        else {
+            var half = to / 2;
+            return this.RandomTo(target - half + 1, target + half, integer);
+        }
+    };
+    KNumberHelper.prototype.IsExtended = function () {
+        return typeof Number.prototype.IsEven === "function" && typeof Number.prototype.Clamp === "function";
+    };
+    KNumberHelper.prototype.ExtendPrimitives = function () {
+        var k = this;
+        Number.prototype.IsOdd = function () {
+            return k.IsOdd(this);
+        };
+        Number.prototype.IsEven = function () {
+            return k.IsEven(this);
+        };
+        Number.prototype.IsInteger = function () {
+            return k.IsInteger(this);
+        };
+        Number.prototype.IsFinite = function () {
+            return k.IsFinite(this);
+        };
+        Number.prototype.IsInfinite = function () {
+            return k.IsInfinite(this);
+        };
+        Number.prototype.IsNaN = function () {
+            return k.IsNaN(this);
+        };
+        Number.prototype.RoundOff = function () {
+            return k.RoundOff(this);
+        };
+        Number.prototype.RoundUp = function () {
+            return k.RoundUp(this);
+        };
+        Number.prototype.RoundDown = function () {
+            return k.RoundDown(this);
+        };
+        Number.prototype.Absolute = function () {
+            return k.Absolute(this);
+        };
+        Number.prototype.SquareRoot = function () {
+            return k.SquareRoot(this);
+        };
+        Number.prototype.ToInt = function () {
+            return k.ToInt(this);
+        };
+        Number.prototype.ToFloat = function () {
+            return k.ToFloat(this);
+        };
+        String.prototype.ToInt = function () {
+            return k.ToInt(this);
+        };
+        String.prototype.ToFloat = function () {
+            return k.ToFloat(this);
+        };
+        Number.prototype.AtMost = function (max) {
+            return k.AtMost(this, max);
+        };
+        Number.prototype.AtLeast = function (min) {
+            return k.AtLeast(this, min);
+        };
+        Number.prototype.Clamp = function (constrain1, constrain2) {
+            return k.Clamp(this, constrain1, constrain2);
+        };
+        Number.prototype.RandomTo = function (to, integer) {
+            return k.RandomTo(this, to, integer);
+        };
+        Number.prototype.RandomFor = function (to, integer) {
+            return k.RandomFor(this, to, integer);
+        };
+        Number.prototype.RandomAround = function (to, integer) {
+            return k.RandomAround(this, to, integer);
+        };
+    };
+    return KNumberHelper;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/SortType.ts":
+/*!*****************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/SortType.ts ***!
+  \*****************************************************/
+/*! exports provided: SortType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortType", function() { return SortType; });
+var AscendingNumerical = /** @class */ (function () {
+    function AscendingNumerical() {
+        this.AscendingNumerical = true;
+        this.DescendingNumerical = false;
+        this.AtoZ = false;
+        this.ZtoA = false;
+    }
+    return AscendingNumerical;
+}());
+var DescendingNumerical = /** @class */ (function () {
+    function DescendingNumerical() {
+        this.AscendingNumerical = false;
+        this.DescendingNumerical = true;
+        this.AtoZ = false;
+        this.ZtoA = false;
+    }
+    return DescendingNumerical;
+}());
+var AtoZ = /** @class */ (function () {
+    function AtoZ() {
+        this.AscendingNumerical = false;
+        this.DescendingNumerical = false;
+        this.AtoZ = true;
+        this.ZtoA = false;
+    }
+    return AtoZ;
+}());
+var ZtoA = /** @class */ (function () {
+    function ZtoA() {
+        this.AscendingNumerical = false;
+        this.DescendingNumerical = false;
+        this.AtoZ = false;
+        this.ZtoA = true;
+    }
+    return ZtoA;
+}());
+var SortType = /** @class */ (function () {
+    function SortType() {
+    }
+    SortType.AscendingNumerical = new AscendingNumerical();
+    SortType.DescendingNumerical = new DescendingNumerical();
+    SortType.AtoZ = new AtoZ();
+    SortType.ZtoA = new ZtoA();
+    return SortType;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/StringHelper.ts":
+/*!*********************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/StringHelper.ts ***!
+  \*********************************************************/
+/*! exports provided: KStringHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KStringHelper", function() { return KStringHelper; });
+var KStringHelper = /** @class */ (function () {
+    function KStringHelper(check, arr) {
+        this.check = check;
+        this.arr = arr;
+    }
+    KStringHelper.prototype.StartsWith = function (string, start) {
+        if (start.trim().length === 0)
+            throw new Error("String to check with cannot be empty");
+        var s = start.trim();
+        var target = string.trim();
+        return target.substr(0, s.length) === s;
+    };
+    KStringHelper.prototype.EndsWith = function (string, end) {
+        if (end.trim().length === 0)
+            throw new Error("String to check with cannot be empty");
+        var s = end.trim();
+        var target = string.trim();
+        return this.TakeLast(target, s.length) === s;
+    };
+    KStringHelper.prototype.ReplaceAll = function (original, regex, replace) {
+        return original.replace(new RegExp(regex, 'g'), replace);
+    };
+    KStringHelper.prototype.IsEmpty = function (string) {
+        return string.trim().length === 0;
+    };
+    KStringHelper.prototype.First = function (string) {
+        if (string.length === 0)
+            throw new Error("String cannot contain nothing");
+        return string.charAt(0);
+    };
+    KStringHelper.prototype.Last = function (string) {
+        if (string.length === 0)
+            throw new Error("String cannot contain nothing");
+        return string.charAt(string.length - 1);
+    };
+    KStringHelper.prototype.CharAt = function (string, val) {
+        if (val > -1) {
+            if (val < string.length)
+                return string.charAt(val);
+            throw new Error("Position cannot be longer than the length of string");
+        }
+        else {
+            if (-val < string.length + 1)
+                return string.charAt(string.length + val);
+            throw new Error("Position cannot be shorter than negative of the length of string");
+        }
+    };
+    KStringHelper.prototype.RemoveFirst = function (string) {
+        if (string.length === 0) {
+            throw new Error("String cannot contain nothing");
+        }
+        return string.substr(1);
+    };
+    KStringHelper.prototype.RemoveLast = function (string) {
+        if (string.length === 0) {
+            throw new Error("String cannot contain nothing");
+        }
+        return string.substr(0, string.length - 1);
+    };
+    KStringHelper.prototype.RemoveCharAt = function (string, val) {
+        if (val > -1) {
+            if (val < string.length) {
+                var front = string.substr(0, val);
+                var back = string.substr(val + 1);
+                return front + back;
+            }
+            throw new Error("Position cannot be longer than the length of string");
+        }
+        else {
+            if (-val < string.length + 1) {
+                var i = string.length + val;
+                var front = string.substr(0, i);
+                var back = string.substr(i + 1);
+                return front + back;
+            }
+            throw new Error("Position cannot be shorter than negative of the length of string");
+        }
+    };
+    KStringHelper.prototype.Remove = function (string, rmv) {
+        return this.ReplaceAll(string, rmv, "");
+    };
+    KStringHelper.prototype.Skip = function (string, val) {
+        return string.substr(val);
+    };
+    KStringHelper.prototype.Take = function (string, val) {
+        return string.substr(0, val);
+    };
+    KStringHelper.prototype.TakeLast = function (string, val) {
+        return string.substr(string.length - val);
+    };
+    KStringHelper.prototype.Cut = function (string, val) {
+        return string.substr(0, string.length - val);
+    };
+    KStringHelper.prototype.Repeat = function (string, val) {
+        if (val < 0) {
+            throw new Error("Count cannot be negative");
+        }
+        return string.repeat(val);
+    };
+    KStringHelper.prototype.Count = function (string, target) {
+        var regExp = new RegExp(target, "gi");
+        return (string.match(regExp) || []).length;
+    };
+    KStringHelper.prototype.Capitalize = function (string) {
+        return string.substr(0, 1).toUpperCase() + string.substr(1);
+    };
+    KStringHelper.prototype.CapitalizeEveryWord = function (string) {
+        var _this = this;
+        return this.arr.Each(string.split(' '), function (s) { return _this.Capitalize(s); }).join(' ');
+    };
+    KStringHelper.prototype.IsAlphanumeric = function (string) {
+        if (!this.check.IsString(string))
+            return false;
+        var code, i, len;
+        for (i = 0, len = string.length; i < len; i++) {
+            code = string.charCodeAt(i);
+            if (!(code > 47 && code < 58) && // numeric (0-9)
+                !(code > 64 && code < 91) && // upper alpha (A-Z)
+                !(code > 96 && code < 123)) { // lower alpha (a-z)
+                return false;
+            }
+        }
+        return true;
+    };
+    KStringHelper.prototype.IsHexidecimal = function (string) {
+        if (!this.check.IsString(string))
+            return false;
+        var a = parseInt(string.toLowerCase(), 16);
+        return (a.toString(16) === string.toLowerCase());
+    };
+    KStringHelper.prototype.Random = function (N) {
+        return Array(N + 1).join((Math.random().toString(36) + '00000000000000000').slice(2, 18)).slice(0, N);
+    };
+    KStringHelper.prototype.IsExtended = function () {
+        return typeof String.prototype.ReplaceAll === "function" && typeof String.prototype.Count === "function";
+    };
+    KStringHelper.prototype.ExtendPrimitives = function () {
+        var k = this;
+        String.prototype.ReplaceAll = function (regex, replace) {
+            return k.ReplaceAll(this, regex, replace);
+        };
+        String.prototype.IsEmpty = function () {
+            return k.IsEmpty(this);
+        };
+        String.prototype.First = function () {
+            return k.First(this);
+        };
+        String.prototype.Last = function () {
+            return k.Last(this);
+        };
+        String.prototype.StartsWith = function (start) {
+            return k.StartsWith(this, start);
+        };
+        String.prototype.EndsWith = function (end) {
+            return k.EndsWith(this, end);
+        };
+        String.prototype.CharAt = function (pos) {
+            return k.CharAt(this, pos);
+        };
+        String.prototype.RemoveFirst = function () {
+            return k.RemoveFirst(this);
+        };
+        String.prototype.RemoveLast = function () {
+            return k.RemoveLast(this);
+        };
+        String.prototype.RemoveCharAt = function (index) {
+            return k.RemoveCharAt(this, index);
+        };
+        String.prototype.Remove = function (target) {
+            return k.Remove(this, target);
+        };
+        String.prototype.Skip = function (x) {
+            return k.Skip(this, x);
+        };
+        String.prototype.Take = function (x) {
+            return k.Take(this, x);
+        };
+        String.prototype.TakeLast = function (x) {
+            return k.TakeLast(this, x);
+        };
+        String.prototype.Cut = function (x) {
+            return k.Cut(this, x);
+        };
+        String.prototype.Repeat = function (x) {
+            return k.Repeat(this, x);
+        };
+        String.prototype.Capitalize = function () {
+            return k.Capitalize(this);
+        };
+        String.prototype.CapitalizeEveryWord = function () {
+            return k.CapitalizeEveryWord(this);
+        };
+        String.prototype.IsAlphanumeric = function () {
+            return k.IsAlphanumeric(this);
+        };
+        String.prototype.IsHexidecimal = function () {
+            return k.IsHexidecimal(this);
+        };
+        String.prototype.Count = function (target) {
+            return k.Count(this, target);
+        };
+    };
+    return KStringHelper;
+}());
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@kirinnee/core/src/index.ts":
+/*!**************************************************!*\
+  !*** ./node_modules/@kirinnee/core/src/index.ts ***!
+  \**************************************************/
+/*! exports provided: KArrayHelper, KCheckHelper, KHTMLHelper, KFileHelper, KMapHelper, KNumberHelper, KStringHelper, Kore, SortType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ArrayHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ArrayHelper */ "./node_modules/@kirinnee/core/src/ArrayHelper.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "KArrayHelper", function() { return _ArrayHelper__WEBPACK_IMPORTED_MODULE_0__["KArrayHelper"]; });
+
+/* harmony import */ var _CheckHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckHelper */ "./node_modules/@kirinnee/core/src/CheckHelper.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "KCheckHelper", function() { return _CheckHelper__WEBPACK_IMPORTED_MODULE_1__["KCheckHelper"]; });
+
+/* harmony import */ var _HTMLHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HTMLHelper */ "./node_modules/@kirinnee/core/src/HTMLHelper.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "KHTMLHelper", function() { return _HTMLHelper__WEBPACK_IMPORTED_MODULE_2__["KHTMLHelper"]; });
+
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FileHelper */ "./node_modules/@kirinnee/core/src/FileHelper.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "KFileHelper", function() { return _FileHelper__WEBPACK_IMPORTED_MODULE_3__["KFileHelper"]; });
+
+/* harmony import */ var _MapHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MapHelper */ "./node_modules/@kirinnee/core/src/MapHelper.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "KMapHelper", function() { return _MapHelper__WEBPACK_IMPORTED_MODULE_4__["KMapHelper"]; });
+
+/* harmony import */ var _NumberHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./NumberHelper */ "./node_modules/@kirinnee/core/src/NumberHelper.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "KNumberHelper", function() { return _NumberHelper__WEBPACK_IMPORTED_MODULE_5__["KNumberHelper"]; });
+
+/* harmony import */ var _StringHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./StringHelper */ "./node_modules/@kirinnee/core/src/StringHelper.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "KStringHelper", function() { return _StringHelper__WEBPACK_IMPORTED_MODULE_6__["KStringHelper"]; });
+
+/* harmony import */ var _Kore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Kore */ "./node_modules/@kirinnee/core/src/Kore.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Kore", function() { return _Kore__WEBPACK_IMPORTED_MODULE_7__["Kore"]; });
+
+/* harmony import */ var _SortType__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SortType */ "./node_modules/@kirinnee/core/src/SortType.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortType", function() { return _SortType__WEBPACK_IMPORTED_MODULE_8__["SortType"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/style.scss":
 /*!***************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/style.scss ***!
@@ -21691,16 +23712,16 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ "./src/Counter.tsx":
+/***/ "./src/Address.tsx":
 /*!*************************!*\
-  !*** ./src/Counter.tsx ***!
+  !*** ./src/Address.tsx ***!
   \*************************/
-/*! exports provided: Counter */
+/*! exports provided: Address */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Counter", function() { return Counter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Address", function() { return Address; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -21717,56 +23738,165 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 
-var Counter = /** @class */ (function (_super) {
-    __extends(Counter, _super);
-    function Counter(prop) {
-        var _this = _super.call(this, prop) || this;
-        _this.Increase = function () {
-            var counter = _this.state.counter + 1;
-            _this.setState({ counter: counter });
-        };
-        _this.Decrease = function () {
-            console.log(_this);
-            var counter = _this.state.counter - 1;
-            _this.setState({ counter: counter });
-        };
-        _this.ChangeName = function (event) {
-            _this.SetName(event.target['value']);
-        };
-        _this.SetName = function (name) {
-            _this.setState({ name: name });
-        };
-        _this.state = { name: 'hi', counter: 0 };
+var Address = /** @class */ (function (_super) {
+    __extends(Address, _super);
+    function Address(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state =
+            {
+                lineOne: 'Line One',
+                lineTwo: 'Line Two',
+                postalCode: 'Postal Code',
+                city: 'City',
+                country: 'Country'
+            };
+        _this.handleChange = _this.handleChange.bind(_this);
         return _this;
     }
-    Counter.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { id: 'test-target' },
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "output" }, (this.state.name + ' ').repeat(this.state.counter)),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", { className: 'increase', onClick: this.Increase }, "Increase"),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", { onClick: this.Decrease }, "Decrease"),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { onChange: this.ChangeName, type: 'text' })));
+    Address.prototype.handleChange = function (event) {
+        var target = event.target;
+        var name = target.name;
+        var value = '';
+        if (name == "lineOne") {
+            value = target.value;
+        }
+        ;
+        if (name == "lineTwo") {
+            value = target.value;
+        }
+        ;
+        if (name == "postalCode") {
+            value = target.value;
+        }
+        ;
+        if (name == "city") {
+            value = target.value;
+        }
+        ;
+        if (name == "country") {
+            value = target.value;
+        }
+        ;
+        var newState = {};
+        newState[name] = value;
+        this.setState(newState);
+        this.props["updateAddress"](this.state);
     };
-    return Counter;
+    Address.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null,
+            "Address: \u00A0",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "lineOne", type: "text", placeholder: this.state.lineOne, onChange: this.handleChange }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            "\u00A0",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "lineTwo", type: "text", placeholder: this.state.lineTwo, onChange: this.handleChange }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            "\u00A0",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "postalCode", type: "text", placeholder: this.state.postalCode, onChange: this.handleChange }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            "\u00A0",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "city", type: "text", placeholder: this.state.city, onChange: this.handleChange }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            "\u00A0",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "country", type: "text", placeholder: this.state.country, onChange: this.handleChange })));
+    };
+    return Address;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
 
 
 /***/ }),
 
-/***/ "./src/Pictureka.tsx":
-/*!***************************!*\
-  !*** ./src/Pictureka.tsx ***!
-  \***************************/
-/*! exports provided: Pictureka */
+/***/ "./src/PaymentPreference.tsx":
+/*!***********************************!*\
+  !*** ./src/PaymentPreference.tsx ***!
+  \***********************************/
+/*! exports provided: PaymentPreference */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Pictureka", function() { return Pictureka; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentPreference", function() { return PaymentPreference; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logo.svg */ "./src/logo.svg");
-/* harmony import */ var _logo_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_logo_svg__WEBPACK_IMPORTED_MODULE_1__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+var PaymentPreference = /** @class */ (function (_super) {
+    __extends(PaymentPreference, _super);
+    function PaymentPreference(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state =
+            {
+                preferredPaymentOptions: []
+            };
+        _this.handleClick = _this.handleClick.bind(_this);
+        return _this;
+    }
+    PaymentPreference.prototype.handleClick = function (event) {
+        //let newState = {};
+        //let name = "preferredPaymentOptions";
+        //for (let i = 0; i < this.state.preferredPaymentOptions.length; i++) {
+        //    newState[name].push(this.state.preferredPaymentOptions[i]);
+        //}
+        if (this.state.preferredPaymentOptions.Contains(event.target.name)) {
+            var newState = this.state.preferredPaymentOptions.RemoveValue(event.target.name);
+            this.setState({ preferredPaymentOptions: newState });
+        }
+        else {
+            this.state.preferredPaymentOptions.push(event.target.name);
+            this.setState({ preferredPaymentOptions: this.state.preferredPaymentOptions });
+        }
+        this.props["updatePaymentPreference"](this.state.preferredPaymentOptions);
+    };
+    PaymentPreference.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null,
+            "Payment Preference:\u00A0",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "Cash", type: "checkbox", onClick: this.handleClick }),
+            "\u00A0Cash ",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "Cheque", type: "checkbox", onClick: this.handleClick }),
+            "\u00A0Cheque ",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "PayNow", type: "checkbox", onClick: this.handleClick }),
+            "\u00A0PayNow ",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "Internet Banking", type: "checkbox", onClick: this.handleClick }),
+            "\u00A0Internet Banking"));
+    };
+    return PaymentPreference;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
+/***/ "./src/ServiceVendorBusinessForm.tsx":
+/*!*******************************************!*\
+  !*** ./src/ServiceVendorBusinessForm.tsx ***!
+  \*******************************************/
+/*! exports provided: ServiceVendorBusinessForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceVendorBusinessForm", function() { return ServiceVendorBusinessForm; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ServiceVendorName__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ServiceVendorName */ "./src/ServiceVendorName.tsx");
+/* harmony import */ var _Address__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Address */ "./src/Address.tsx");
+/* harmony import */ var _PaymentPreference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PaymentPreference */ "./src/PaymentPreference.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -21782,38 +23912,146 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 
 
-var Pictureka = /** @class */ (function (_super) {
-    __extends(Pictureka, _super);
-    function Pictureka() {
-        return _super !== null && _super.apply(this, arguments) || this;
+
+
+var ServiceVendorBusinessForm = /** @class */ (function (_super) {
+    __extends(ServiceVendorBusinessForm, _super);
+    function ServiceVendorBusinessForm(prop) {
+        var _this = _super.call(this, prop) || this;
+        _this.state =
+            {
+                name: '',
+                address: {
+                    lineOne: '',
+                    lineTwo: '',
+                    postalCode: '',
+                    city: '',
+                    country: ''
+                },
+                aCRANumber: '',
+                employeeCount: '--Please Select--',
+                paymentPreference: ''
+            };
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.submitForm = _this.submitForm.bind(_this);
+        _this.updateName = _this.updateName.bind(_this);
+        _this.updateAddress = _this.updateAddress.bind(_this);
+        _this.updatePaymentPreference = _this.updatePaymentPreference.bind(_this);
+        return _this;
     }
-    Pictureka.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("img", { src: _logo_svg__WEBPACK_IMPORTED_MODULE_1___default.a }));
+    ServiceVendorBusinessForm.prototype.handleChange = function (event) {
+        var target = event.target;
+        var name = target.name;
+        var value = '';
+        if (name == "aCRANumber") {
+            value = target.value;
+        }
+        ;
+        if (name == "employeeCount") {
+            value = target.value;
+        }
+        ;
+        if (name == "paymentPreference") {
+            value = target.value;
+        }
+        ;
+        var newState = {};
+        newState[name] = value;
+        console.log(value);
+        this.setState(newState);
+        console.log(name);
+        console.log(newState);
     };
-    return Pictureka;
+    ServiceVendorBusinessForm.prototype.updateName = function (val) {
+        this.setState({ name: val });
+        console.log(val);
+    };
+    ServiceVendorBusinessForm.prototype.updateAddress = function (val) {
+        this.setState({ address: val });
+        console.log(this.state);
+    };
+    ServiceVendorBusinessForm.prototype.updatePaymentPreference = function (val) {
+        this.setState({ paymentPreference: val });
+        console.log(this.state);
+    };
+    ServiceVendorBusinessForm.prototype.submitForm = function () {
+        localStorage.setItem("Business", JSON.stringify(this.state));
+    };
+    ServiceVendorBusinessForm.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("form", null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_ServiceVendorName__WEBPACK_IMPORTED_MODULE_1__["ServiceVendorName"], { updateName: this.updateName }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Address__WEBPACK_IMPORTED_MODULE_2__["Address"], { updateAddress: this.updateAddress }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null,
+                "UEN: \u00A0",
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { name: "aCRANumber", type: "text", value: this.state.aCRANumber, onChange: this.handleChange })),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null,
+                "Company Size: \u00A0",
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("select", { name: "employeeCount", value: this.state.employeeCount, onChange: this.handleChange },
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Micro: Less than 10" }, "\u00A0Micro: Less than 10"),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Small: 10 - 49" }, "\u00A0Small: 10 - 49"),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Medium: 50 - 249" }, "\u00A0Medium: 50 - 249"),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "Large: More than 249" }, "\u00A0Large: More than 249"))),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("br", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_PaymentPreference__WEBPACK_IMPORTED_MODULE_3__["PaymentPreference"], { updatePaymentPreference: this.updatePaymentPreference }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("hr", null),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { type: "submit", value: "Submit", onClick: this.submitForm })));
+    };
+    return ServiceVendorBusinessForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
 
 
 /***/ }),
 
-/***/ "./src/Repeat.tsx":
-/*!************************!*\
-  !*** ./src/Repeat.tsx ***!
-  \************************/
-/*! exports provided: Repeat */
+/***/ "./src/ServiceVendorName.tsx":
+/*!***********************************!*\
+  !*** ./src/ServiceVendorName.tsx ***!
+  \***********************************/
+/*! exports provided: ServiceVendorName */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Repeat", function() { return Repeat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceVendorName", function() { return ServiceVendorName; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
-function Repeat(_a) {
-    var string = _a.string, repeat = _a.repeat;
-    return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null, (string + " ").repeat(repeat)));
-}
+var ServiceVendorName = /** @class */ (function (_super) {
+    __extends(ServiceVendorName, _super);
+    function ServiceVendorName(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = { value: '' };
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
+    }
+    ServiceVendorName.prototype.handleChange = function (event) {
+        this.props["updateName"](event.target.value);
+        this.setState({ value: event.target.value });
+    };
+    ServiceVendorName.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null,
+            "Name:\u00A0",
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { type: "text", value: this.state.value, onChange: this.handleChange })));
+    };
+    return ServiceVendorName;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
 
 
 /***/ }),
@@ -21833,32 +24071,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Repeat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Repeat */ "./src/Repeat.tsx");
-/* harmony import */ var _Counter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Counter */ "./src/Counter.tsx");
-/* harmony import */ var _Pictureka__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Pictureka */ "./src/Pictureka.tsx");
+/* harmony import */ var _ServiceVendorBusinessForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ServiceVendorBusinessForm */ "./src/ServiceVendorBusinessForm.tsx");
+/* harmony import */ var _kirinnee_core_src__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @kirinnee/core/src */ "./node_modules/@kirinnee/core/src/index.ts");
 
 
 
 
 
-
+var c = new _kirinnee_core_src__WEBPACK_IMPORTED_MODULE_4__["Kore"]();
+c.ExtendPrimitives();
 react_dom__WEBPACK_IMPORTED_MODULE_1__["render"](react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null,
-    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Repeat__WEBPACK_IMPORTED_MODULE_3__["Repeat"], { string: 'hi', repeat: 100 }),
-    " ",
-    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Counter__WEBPACK_IMPORTED_MODULE_4__["Counter"], null),
-    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Pictureka__WEBPACK_IMPORTED_MODULE_5__["Pictureka"], null)), document.getElementById('app'));
+    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_ServiceVendorBusinessForm__WEBPACK_IMPORTED_MODULE_3__["ServiceVendorBusinessForm"], null)), document.getElementById('app'));
 
-
-/***/ }),
-
-/***/ "./src/logo.svg":
-/*!**********************!*\
-  !*** ./src/logo.svg ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "logo.svg";
 
 /***/ }),
 
