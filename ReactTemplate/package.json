@@ -11,7 +11,7 @@
     "dev": "webpack --env dev --watch",
     "test": "npm run unit-test && npm run ui-test",
     "unit-test": "webpack --env unit-test && mocha --require @babel/register --colors ./test/unit/*.test.js",
-    "ui-test": "webpack --env ui-test && testcafe chrome:headless test/ui/index.test.ts"
+    "ui-test": "webpack --env ui-test && testcafe edge test/ui/index.test.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -49,7 +49,6 @@
     "jsdom": "^12.0.0",
     "jsdom-global": "^3.0.2",
     "react": "^16.5.0",
-    "react-bootstrap": "^0.32.4",
     "react-dom": "^16.5.0"
   }
 }

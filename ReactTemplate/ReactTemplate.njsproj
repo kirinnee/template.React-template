@@ -34,7 +34,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="src\Counter.tsx" />
+    <Content Include="src\FormComponents\FormInput.tsx" />
+    <Content Include="src\Form\CoordinateRegistrationForm.tsx" />
     <Content Include="src\index.html" />
     <Content Include="src\logo.svg" />
     <Content Include="src\style.scss" />
@@ -50,6 +51,8 @@
     <Folder Include="config\test\" />
     <Folder Include="dev\" />
     <Folder Include="public\" />
+    <Folder Include="src\FormComponents\" />
+    <Folder Include="src\Form\" />
     <Folder Include="test\" />
     <Folder Include="src\" />
     <Folder Include="test\ui\" />
@@ -65,20 +68,15 @@
     <Compile Include="config\test\webpack.unit.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\FormComponents\NRIC.tsx" />
     <TypeScriptCompile Include="src\image.d.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\index.tsx" />
-    <TypeScriptCompile Include="src\Pictureka.tsx">
+    <TypeScriptCompile Include="src\Form\ServiceVendorBusinessForm.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Repeat.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\ServiceVendorBusinessForm.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\ServiceVendorName.tsx">
+    <TypeScriptCompile Include="src\FormComponents\Name.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="test\ui\index.test.ts">

@@ -98,7 +98,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "body {\n  background-color: lawngreen; }\n", ""]);
+exports.push([module.i, "body {\n  margin: 0; }\n\n.clearfix::after {\n  content: \"\";\n  clear: both;\n  display: table; }\n\n.form-item, .form-group label, .form-group .form-input-holder, .form-group .form-input-holder .input-size, .form-icon-holder {\n  height: 20px;\n  float: left;\n  display: block;\n  position: relative;\n  font-family: sans-serif;\n  font-size: 16px; }\n\n.form-group {\n  width: 100%;\n  height: 20px;\n  margin: 5px 0 20px; }\n  .form-group label {\n    line-height: 20px;\n    width: 200px; }\n  .form-group .form-input-holder .input-size {\n    padding: 0 5px;\n    border: 1px solid black;\n    border-radius: 3px;\n    width: 200px; }\n\n.form-container {\n  width: 500px;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.form-icon-holder {\n  margin: 0 5px; }\n  .form-icon-holder img {\n    position: absolute;\n    height: 20px; }\n\n.form-input-invalid-message {\n  color: indianred;\n  font-size: 12px;\n  font-family: sans-serif; }\n", ""]);
 
 // exports
 
@@ -21691,18 +21691,23 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ "./src/Counter.tsx":
-/*!*************************!*\
-  !*** ./src/Counter.tsx ***!
-  \*************************/
-/*! exports provided: Counter */
+/***/ "./src/Form/CoordinateRegistrationForm.tsx":
+/*!*************************************************!*\
+  !*** ./src/Form/CoordinateRegistrationForm.tsx ***!
+  \*************************************************/
+/*! exports provided: CoordinateRegister */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Counter", function() { return Counter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoordinateRegister", function() { return CoordinateRegister; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _FormComponents_Name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormComponents/Name */ "./src/FormComponents/Name.tsx");
+/* harmony import */ var _FormComponents_NRIC__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormComponents/NRIC */ "./src/FormComponents/NRIC.tsx");
+/* harmony import */ var _FormComponents_EmployeeNumber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormComponents/EmployeeNumber */ "./src/FormComponents/EmployeeNumber.tsx");
+/* harmony import */ var _FormComponents_Contact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FormComponents/Contact */ "./src/FormComponents/Contact.tsx");
+/* harmony import */ var _FormComponents_Password__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../FormComponents/Password */ "./src/FormComponents/Password.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -21717,56 +21722,95 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 
-var Counter = /** @class */ (function (_super) {
-    __extends(Counter, _super);
-    function Counter(prop) {
-        var _this = _super.call(this, prop) || this;
-        _this.Increase = function () {
-            var counter = _this.state.counter + 1;
-            _this.setState({ counter: counter });
+
+
+
+
+
+var CoordinateRegister = /** @class */ (function (_super) {
+    __extends(CoordinateRegister, _super);
+    function CoordinateRegister(props) {
+        return _super.call(this, props) || this;
+    }
+    CoordinateRegister.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: 'form-container' },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("form", { id: this.props.formid },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Name__WEBPACK_IMPORTED_MODULE_1__["NameInput"], null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_NRIC__WEBPACK_IMPORTED_MODULE_2__["NRICInput"], null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_EmployeeNumber__WEBPACK_IMPORTED_MODULE_3__["EmployeeNumberInput"], null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Contact__WEBPACK_IMPORTED_MODULE_4__["ContactInput"], null),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormComponents_Password__WEBPACK_IMPORTED_MODULE_5__["PasswordInput"], null))));
+    };
+    return CoordinateRegister;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
+/***/ "./src/FormComponents/Contact.tsx":
+/*!****************************************!*\
+  !*** ./src/FormComponents/Contact.tsx ***!
+  \****************************************/
+/*! exports provided: ContactInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactInput", function() { return ContactInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var ContactInput = /** @class */ (function (_super) {
+    __extends(ContactInput, _super);
+    function ContactInput(props) {
+        var _this = _super.call(this, props) || this;
+        _this.setValue = function (event) {
+            _this.setState({
+                value: event.target['value']
+            });
         };
-        _this.Decrease = function () {
-            console.log(_this);
-            var counter = _this.state.counter - 1;
-            _this.setState({ counter: counter });
-        };
-        _this.ChangeName = function (event) {
-            _this.SetName(event.target['value']);
-        };
-        _this.SetName = function (name) {
-            _this.setState({ name: name });
-        };
-        _this.state = { name: 'hi', counter: 0 };
+        _this.state = { value: '' };
         return _this;
     }
-    Counter.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { id: 'test-target' },
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "output" }, (this.state.name + ' ').repeat(this.state.counter)),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", { className: 'increase', onClick: this.Increase }, "Increase"),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", { onClick: this.Decrease }, "Decrease"),
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { onChange: this.ChangeName, type: 'text' })));
+    ContactInput.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Contact No.', type: 'tel', value: this.state.value, addition: undefined, change: this.setValue }));
     };
-    return Counter;
+    return ContactInput;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
 
 
 /***/ }),
 
-/***/ "./src/Pictureka.tsx":
-/*!***************************!*\
-  !*** ./src/Pictureka.tsx ***!
-  \***************************/
-/*! exports provided: Pictureka */
+/***/ "./src/FormComponents/EmployeeNumber.tsx":
+/*!***********************************************!*\
+  !*** ./src/FormComponents/EmployeeNumber.tsx ***!
+  \***********************************************/
+/*! exports provided: EmployeeNumberInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Pictureka", function() { return Pictureka; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmployeeNumberInput", function() { return EmployeeNumberInput; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logo.svg */ "./src/logo.svg");
-/* harmony import */ var _logo_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_logo_svg__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -21782,39 +21826,411 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 
 
-var Pictureka = /** @class */ (function (_super) {
-    __extends(Pictureka, _super);
-    function Pictureka() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var EmployeeNumberInput = /** @class */ (function (_super) {
+    __extends(EmployeeNumberInput, _super);
+    function EmployeeNumberInput(props) {
+        var _this = _super.call(this, props) || this;
+        _this.setValue = function (event) {
+            _this.setState({
+                value: event.target['value']
+            });
+        };
+        _this.state = { value: '' };
+        return _this;
     }
-    Pictureka.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("img", { src: _logo_svg__WEBPACK_IMPORTED_MODULE_1___default.a }));
+    EmployeeNumberInput.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Employee No.', type: 'text', value: this.state.value, addition: undefined, change: this.setValue }));
     };
-    return Pictureka;
+    return EmployeeNumberInput;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
 
 
 /***/ }),
 
-/***/ "./src/Repeat.tsx":
-/*!************************!*\
-  !*** ./src/Repeat.tsx ***!
-  \************************/
-/*! exports provided: Repeat */
+/***/ "./src/FormComponents/FormInput.tsx":
+/*!******************************************!*\
+  !*** ./src/FormComponents/FormInput.tsx ***!
+  \******************************************/
+/*! exports provided: FormInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Repeat", function() { return Repeat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormInput", function() { return FormInput; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
-function Repeat(_a) {
-    var string = _a.string, repeat = _a.repeat;
-    return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null, (string + " ").repeat(repeat)));
-}
+var FormInput = /** @class */ (function (_super) {
+    __extends(FormInput, _super);
+    function FormInput(props) {
+        return _super.call(this, props) || this;
+    }
+    FormInput.prototype.render = function () {
+        var addComponent = typeof this.props.addition !== "undefined";
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-group" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null,
+                " ",
+                this.props.label,
+                " "),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-input-holder" },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", { className: "input-size", type: this.props.type, value: this.props.value, onChange: this.props.change }),
+                addComponent && this.props.addition)));
+    };
+    return FormInput;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
+
+
+/***/ }),
+
+/***/ "./src/FormComponents/NRIC.tsx":
+/*!*************************************!*\
+  !*** ./src/FormComponents/NRIC.tsx ***!
+  \*************************************/
+/*! exports provided: NRICInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NRICInput", function() { return NRICInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
+/* harmony import */ var _Validation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Validation */ "./src/FormComponents/Validation.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+var NRICInput = /** @class */ (function (_super) {
+    __extends(NRICInput, _super);
+    function NRICInput(props) {
+        var _this = _super.call(this, props) || this;
+        _this.CheckNRICValidity = function (event) {
+            var val = event.target['value'];
+            var nric = val === null ? '' : val;
+            _this.setState({ nric: nric });
+            if (_this.IsNRICValid(nric)) {
+                _this.setState({ valid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid });
+            }
+            else {
+                _this.setState({ valid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid });
+            }
+        };
+        _this.state = { nric: '', valid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].none };
+        return _this;
+    }
+    NRICInput.prototype.IsNRICValid = function (nric) {
+        if (nric.length !== 9 ||
+            !['S', 'T', 'G', 'F'].includes(nric[0].toUpperCase())) {
+            return false;
+        }
+        var lastLetter = nric[8].toUpperCase();
+        var nricCheckDigits = 'JZIHGFEDCBA';
+        var finCheckDigits = 'XWUTRQPNMLK';
+        var digits = nric.slice(1, 8);
+        var weights = [2, 7, 6, 5, 4, 3, 2];
+        var sum = 0;
+        if (isNaN(parseInt(digits))) {
+            return false;
+        }
+        if (['T', 'G'].includes(nric[0].toUpperCase())) {
+            sum += 4;
+        }
+        for (var i = 0; i < digits.length; i++) {
+            sum += parseInt(digits.charAt(i), 10) * weights[i];
+        }
+        if (['S', 'T'].includes(nric[0].toUpperCase())) {
+            return nricCheckDigits.charAt(sum % 11) === lastLetter;
+        }
+        return finCheckDigits.charAt(sum % 11) === lastLetter;
+    };
+    NRICInput.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'NRIC', type: 'text', value: this.state.nric, addition: react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Validation__WEBPACK_IMPORTED_MODULE_2__["ValidityIcon"], { valid: this.state.valid, message: 'NRIC is in an invalid format' }), change: this.CheckNRICValidity }));
+    };
+    return NRICInput;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
+/***/ "./src/FormComponents/Name.tsx":
+/*!*************************************!*\
+  !*** ./src/FormComponents/Name.tsx ***!
+  \*************************************/
+/*! exports provided: NameInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NameInput", function() { return NameInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var NameInput = /** @class */ (function (_super) {
+    __extends(NameInput, _super);
+    function NameInput(props) {
+        var _this = _super.call(this, props) || this;
+        _this.setValue = function (event) {
+            _this.setState({
+                value: event.target['value']
+            });
+        };
+        _this.state = { value: '' };
+        return _this;
+    }
+    NameInput.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Name', type: 'text', value: this.state.value, addition: undefined, change: this.setValue }));
+    };
+    return NameInput;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
+/***/ "./src/FormComponents/Password.tsx":
+/*!*****************************************!*\
+  !*** ./src/FormComponents/Password.tsx ***!
+  \*****************************************/
+/*! exports provided: PasswordInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PasswordInput", function() { return PasswordInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _FormInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormInput */ "./src/FormComponents/FormInput.tsx");
+/* harmony import */ var _Validation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Validation */ "./src/FormComponents/Validation.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+var PasswordInput = /** @class */ (function (_super) {
+    __extends(PasswordInput, _super);
+    function PasswordInput(props) {
+        var _this = _super.call(this, props) || this;
+        //Validations, and message setting
+        _this.isPasswordValid = function (pw) {
+            if (pw.length < 8) {
+                _this.setInvalidPasswordMessage('Password needs to be 8 characters long');
+                return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
+            }
+            if (!/\d/.test(pw)) {
+                _this.setInvalidPasswordMessage('Password needs to be alphanumeric');
+                return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
+            }
+            if (pw.toLowerCase() === pw) {
+                _this.setInvalidPasswordMessage('Password need at least 1 character in uppercase');
+                return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
+            }
+            _this.setInvalidPasswordMessage('');
+            return _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid;
+        };
+        _this.isRepeatValid = function (current, repeat) {
+            var valid = current === repeat;
+            var message = valid ? '' : 'Passwords do not match';
+            _this.setInvalidRepeatMessage(message);
+            return valid ? _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].valid : _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].invalid;
+        };
+        //Event Handler
+        _this.checkPassword = function (event) {
+            var value = event.target['value'];
+            _this.setPassword(value);
+            var valid = _this.isPasswordValid(value);
+            _this.setState({ passwordValid: valid });
+            var repeat = _this.state.repeatpassword;
+            if (repeat !== '') {
+                _this.setRepeat(repeat);
+                var v = _this.isRepeatValid(value, repeat);
+                _this.setState({ repeatValid: v });
+            }
+        };
+        _this.checkRepeat = function (event) {
+            var value = event.target['value'];
+            _this.setRepeat(value);
+            var current = _this.state.password;
+            var valid = _this.isRepeatValid(current, value);
+            _this.setState({ repeatValid: valid });
+        };
+        _this.state = {
+            password: '',
+            repeatpassword: '',
+            passwordValid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].none,
+            repeatValid: _Validation__WEBPACK_IMPORTED_MODULE_2__["Validity"].none,
+            invalidPaswordMessage: '',
+            invalidRepeatMessage: ''
+        };
+        return _this;
+    }
+    //State Setting
+    PasswordInput.prototype.setInvalidPasswordMessage = function (valid) {
+        this.setState({ invalidPaswordMessage: valid });
+    };
+    PasswordInput.prototype.setInvalidRepeatMessage = function (valid) {
+        this.setState({ invalidRepeatMessage: valid });
+    };
+    //Update Input
+    PasswordInput.prototype.setPassword = function (password) {
+        this.setState({ password: password });
+    };
+    PasswordInput.prototype.setRepeat = function (repeatpassword) {
+        this.setState({ repeatpassword: repeatpassword });
+    };
+    PasswordInput.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Password', type: 'password', value: this.state.password, addition: react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Validation__WEBPACK_IMPORTED_MODULE_2__["ValidityIcon"], { valid: this.state.passwordValid, message: this.state.invalidPaswordMessage }), change: this.checkPassword }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_FormInput__WEBPACK_IMPORTED_MODULE_1__["FormInput"], { cls: '', label: 'Retype Password', type: 'password', value: this.state.repeatpassword, addition: react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Validation__WEBPACK_IMPORTED_MODULE_2__["ValidityIcon"], { valid: this.state.repeatValid, message: this.state.invalidRepeatMessage }), change: this.checkRepeat })));
+    };
+    return PasswordInput;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
+/***/ "./src/FormComponents/Validation.tsx":
+/*!*******************************************!*\
+  !*** ./src/FormComponents/Validation.tsx ***!
+  \*******************************************/
+/*! exports provided: Validity, ValidityIcon */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Validity", function() { return Validity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidityIcon", function() { return ValidityIcon; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _images_tick_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../images/tick.svg */ "./src/images/tick.svg");
+/* harmony import */ var _images_tick_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_images_tick_svg__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _images_cross_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../images/cross.svg */ "./src/images/cross.svg");
+/* harmony import */ var _images_cross_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_images_cross_svg__WEBPACK_IMPORTED_MODULE_2__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+var Validity;
+(function (Validity) {
+    Validity[Validity["valid"] = 0] = "valid";
+    Validity[Validity["invalid"] = 1] = "invalid";
+    Validity[Validity["none"] = 2] = "none";
+})(Validity || (Validity = {}));
+var ValidityIcon = /** @class */ (function (_super) {
+    __extends(ValidityIcon, _super);
+    function ValidityIcon(props) {
+        return _super.call(this, props) || this;
+    }
+    ValidityIcon.prototype.render = function () {
+        var _this = this;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "form-icon-holder" }, (function () {
+                switch (_this.props.valid) {
+                    case Validity.none:
+                        return null;
+                    case Validity.valid:
+                        return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("img", { src: _images_tick_svg__WEBPACK_IMPORTED_MODULE_1___default.a });
+                    case Validity.invalid:
+                        return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("img", { src: _images_cross_svg__WEBPACK_IMPORTED_MODULE_2___default.a });
+                    default:
+                        throw new Error('ArgumentException: Unknown validity enum');
+                }
+            })()),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: 'form-input-invalid-message' }, this.props.valid === Validity.invalid &&
+                this.props.message)));
+    };
+    return ValidityIcon;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
+/***/ "./src/images/cross.svg":
+/*!******************************!*\
+  !*** ./src/images/cross.svg ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/cross.svg";
+
+/***/ }),
+
+/***/ "./src/images/tick.svg":
+/*!*****************************!*\
+  !*** ./src/images/tick.svg ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/tick.svg";
 
 /***/ }),
 
@@ -21833,32 +22249,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Repeat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Repeat */ "./src/Repeat.tsx");
-/* harmony import */ var _Counter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Counter */ "./src/Counter.tsx");
-/* harmony import */ var _Pictureka__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Pictureka */ "./src/Pictureka.tsx");
+/* harmony import */ var _Form_CoordinateRegistrationForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Form/CoordinateRegistrationForm */ "./src/Form/CoordinateRegistrationForm.tsx");
 
 
 
 
+react_dom__WEBPACK_IMPORTED_MODULE_1__["render"](react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Form_CoordinateRegistrationForm__WEBPACK_IMPORTED_MODULE_3__["CoordinateRegister"], { formid: 'coord-form' }), document.getElementById('app'));
 
-
-react_dom__WEBPACK_IMPORTED_MODULE_1__["render"](react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null,
-    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Repeat__WEBPACK_IMPORTED_MODULE_3__["Repeat"], { string: 'hi', repeat: 100 }),
-    " ",
-    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Counter__WEBPACK_IMPORTED_MODULE_4__["Counter"], null),
-    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Pictureka__WEBPACK_IMPORTED_MODULE_5__["Pictureka"], null)), document.getElementById('app'));
-
-
-/***/ }),
-
-/***/ "./src/logo.svg":
-/*!**********************!*\
-  !*** ./src/logo.svg ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "logo.svg";
 
 /***/ }),
 

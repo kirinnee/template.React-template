@@ -41,7 +41,7 @@ function generate(path,dir) {
                 { test: /\.tsx?$/, use: 'awesome-typescript-loader' },
                 { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
                 {
-                    test: /\.scss$/,
+                    test: /\.(scss|css)$/,
                     use: [
                         'style-loader',
                         {
