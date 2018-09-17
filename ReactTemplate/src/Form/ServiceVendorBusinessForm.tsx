@@ -1,9 +1,7 @@
 ﻿import * as React from 'react';
-import { ServiceVendorName } from '../ServiceVendorName';
 import { IAddress, Address } from '../Address';
 import { PaymentPreference } from '../PaymentPreference';
 import { NameInput } from '../FormComponents/Name';
-import { FormInput } from '../FormComponents/FormInput';
 
 interface IProp {
 

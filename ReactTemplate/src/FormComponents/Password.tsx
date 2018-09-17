@@ -2,7 +2,9 @@
 import { FormInput } from './FormInput';
 import { ChangeEvent } from 'react';
 import { ValidityIcon, Validity } from './Validation';
-interface IProp { }
+interface IProp {
+    getPassword:(password: string | null) => void;
+}
 
 interface IState {
     password: string;
@@ -69,27 +71,39 @@ export class PasswordInput extends React.Component<IProp, IState> {
         return valid ? Validity.valid : Validity.invalid;
     }
 
-    //Event Handler
-    checkPassword = (event: ChangeEvent) => {
-        let value = event.target['value'];
-        this.setPassword(value);
-        let valid = this.isPasswordValid(value);
+    //RealMethods
+    passwordChange(password: string): Validity {
+        this.setPassword(password);
+        let valid = this.isPasswordValid(password);
         this.setState({ passwordValid: valid });
-
-        let repeat = this.state.repeatpassword;
-        if (repeat !== '') {
-            this.setRepeat(repeat);
-            let v = this.isRepeatValid(value, repeat);
-            this.setState({ repeatValid: v });
-        }
+        return valid;
     }
-    
-    checkRepeat = (event: ChangeEvent) => {
-        let value = event.target['value'];
-        this.setRepeat(value);
-        let current = this.state.password;
-        let valid = this.isRepeatValid(current, value);
-        this.setState({ repeatValid: valid });
+    repeatChange(password: string, repeat: string): Validity {
+        this.setRepeat(repeat);
+        let v = this.isRepeatValid(password, repeat);
+        if (v === Validity.valid && this.isPasswordValid(password) !== Validity.valid) {
+            v = Validity.invalid;
+        }
+        this.setState({ repeatValid: v });
+        return v;
+    }
+
+
+    //Event Handler
+    handePasswordChange = (event: ChangeEvent) => {
+        let password = event.target['value'];
+        let repeat = this.state.repeatpassword;
+
+        this.passwordChange(password);
+        let result = this.repeatChange(password, repeat);
+        this.props.getPassword(result === Validity.valid ? repeat: null)
+    }
+    handeRepeatChange = (event: ChangeEvent) => {
+        let repeat = event.target['value'];
+        let password = this.state.password;
+
+        let result = this.repeatChange(password, repeat);
+        this.props.getPassword(result === Validity.valid ? repeat : null)
     }
 
     render() {
@@ -103,7 +117,7 @@ export class PasswordInput extends React.Component<IProp, IState> {
                             message={this.state.invalidPaswordMessage}
                         />
                     }
-                    change={this.checkPassword}
+                    change={this.handePasswordChange}
                 />
                 <FormInput cls='' label='Retype Password' type='password'
                     value={this.state.repeatpassword}
@@ -113,7 +127,7 @@ export class PasswordInput extends React.Component<IProp, IState> {
                             message={this.state.invalidRepeatMessage}
                         />
                     }
-                    change={this.checkRepeat}
+                    change={this.handeRepeatChange}
                 />
             </>
         );

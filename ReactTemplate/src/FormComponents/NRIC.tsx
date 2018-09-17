@@ -65,7 +65,6 @@ export class NRICInput extends React.Component<IProp, IState>{
     render() {
         return (
             <FormInput cls='' label='NRIC' type='text' value={this.state.nric} addition={<ValidityIcon valid={this.state.valid} message='NRIC is in an invalid format' />} change={this.CheckNRICValidity} />
-
         );
 
     }
