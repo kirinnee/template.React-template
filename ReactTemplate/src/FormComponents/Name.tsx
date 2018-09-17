@@ -1,7 +1,9 @@
 ﻿import * as React from 'react';
 import { FormInput } from './FormInput';
 import { ChangeEvent } from 'react';
-interface IProp {}
+interface IProp {
+    getName: (s: string) => void;
+}
 
 interface IState {
     value: string;
@@ -15,9 +17,13 @@ export class NameInput extends React.Component<IProp, IState> {
     }
 
     setValue = (event: ChangeEvent) => {
+        let value: string = event.target['value'];
         this.setState({
-            value: (event.target['value'] as string)
+            value: value
         });
+        this.props.getName(value);
+
+
     }
 
     render() {

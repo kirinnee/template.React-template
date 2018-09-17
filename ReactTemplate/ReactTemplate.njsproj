@@ -84,13 +84,7 @@
     <TypeScriptCompile Include="src\PaymentPreference.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Pictureka.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Repeat.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\ServiceVendorBusinessForm.tsx">
+    <TypeScriptCompile Include="src\Form\ServiceVendorBusinessForm.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\FormComponents\Name.tsx">
