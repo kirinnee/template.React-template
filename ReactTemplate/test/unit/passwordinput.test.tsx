@@ -13,9 +13,13 @@ export function PasswordInputTest() {
 
         }
 
+        let changePassword = (event: Function) => {
+
+        }
+
         describe("setInvalidPasswordMessage", () => {
 
-            let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+            let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
             let instance: PasswordInput = wrapper.instance() as PasswordInput;
 
             it("should set the message for invalid password", () => {
@@ -25,7 +29,7 @@ export function PasswordInputTest() {
         });
 
         describe("setInvalidRepeatMessage", () => {
-            let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+            let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
             let instance: PasswordInput = wrapper.instance() as PasswordInput;
 
             it("should set the message for invalid repeat", () => {
@@ -36,7 +40,7 @@ export function PasswordInputTest() {
 
 
         describe("setPassword", () => {
-            let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+            let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
             let instance: PasswordInput = wrapper.instance() as PasswordInput;
             it("should set the password state", () => {
                 instance.setPassword('encryptionk3y');
@@ -45,7 +49,7 @@ export function PasswordInputTest() {
         });
 
         describe("setRepeat", () => {
-            let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+            let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
             let instance: PasswordInput = wrapper.instance() as PasswordInput;
             it("should set the repeat password state", () => {
                 instance.setRepeat('encryptionk3ytoo');
@@ -57,7 +61,7 @@ export function PasswordInputTest() {
            
             describe('Password shorter than 8 characters', () => {
 
-                let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+                let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
                 let instance: PasswordInput = wrapper.instance() as PasswordInput;
                 let result = instance.isPasswordValid('abcde');
 
@@ -75,7 +79,7 @@ export function PasswordInputTest() {
 
             describe('Password not alphanumeric', () => {
 
-                let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+                let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
                 let instance: PasswordInput = wrapper.instance() as PasswordInput;
                 let result = instance.isPasswordValid('abcdefghijk');
 
@@ -91,7 +95,7 @@ export function PasswordInputTest() {
 
             describe('Password no capital letter', () => {
 
-                let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+                let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
                 let instance: PasswordInput = wrapper.instance() as PasswordInput;
                 let result = instance.isPasswordValid('abcdefghijk234');
 
@@ -106,7 +110,7 @@ export function PasswordInputTest() {
             });
 
             describe('Password that is secure', () => {
-                let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+                let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
                 let instance: PasswordInput = wrapper.instance() as PasswordInput;
                 let result = instance.isPasswordValid('Abcdefghijk234');
 
@@ -126,7 +130,7 @@ export function PasswordInputTest() {
             
 
             describe('password and repeat are different', () => {
-                let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+                let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
                 let instance: PasswordInput = wrapper.instance() as PasswordInput;
                 let result: Validity = instance.isRepeatValid('abc', 'acd');
                 it('should return invalid', () => {
@@ -139,7 +143,7 @@ export function PasswordInputTest() {
             });
 
             describe('password and repeat same', () => {
-                let wrapper = shallow(<PasswordInput getPassword={obtainPassword} />)
+                let wrapper = shallow(<PasswordInput resetPassword={changePassword} getPassword={obtainPassword} />)
                 let instance: PasswordInput = wrapper.instance() as PasswordInput;
                 let result: Validity = instance.isRepeatValid('abc', 'abc');
                 it('should return invalid', () => {

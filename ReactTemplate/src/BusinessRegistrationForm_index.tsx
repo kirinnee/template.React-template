@@ -1,4 +1,4 @@
-import * as React from 'react';
+﻿import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './style.scss';
 import { ServiceVendorBusinessForm } from './Form/BusinessRegistrationForm';
@@ -10,8 +10,6 @@ c.ExtendPrimitives();
 
 
 ReactDOM.render(
-    <ServiceVendorBusinessForm formid="ServiceVendorBusinessForm"/>,
+    <ServiceVendorBusinessForm formid="ServiceVendorBusinessForm" />,
     document.getElementById('app') as HTMLElement
 );
-
-

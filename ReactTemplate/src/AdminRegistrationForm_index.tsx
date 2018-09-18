@@ -1,7 +1,7 @@
-import * as React from 'react';
+﻿import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './style.scss';
-import { ServiceVendorBusinessForm } from './Form/BusinessRegistrationForm';
+import { AdminRegistrationForm } from './Form/AdminRegistrationForm';
 import { Kore } from '@kirinnee/core/src';
 
 
@@ -10,8 +10,6 @@ c.ExtendPrimitives();
 
 
 ReactDOM.render(
-    <ServiceVendorBusinessForm formid="ServiceVendorBusinessForm"/>,
+    <AdminRegistrationForm formid="AdminRegistrationForm" />,
     document.getElementById('app') as HTMLElement
 );
-
-

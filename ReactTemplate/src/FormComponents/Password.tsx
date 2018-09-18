@@ -3,7 +3,8 @@ import { FormInput } from './FormInput';
 import { ChangeEvent } from 'react';
 import { ValidityIcon, Validity } from './Validation';
 interface IProp {
-    getPassword:(password: string | null) => void;
+    getPassword: (password: string | null) => void;
+    resetPassword: (event: Function) => void;
 }
 
 interface IState {
@@ -21,6 +22,7 @@ interface IState {
 export class PasswordInput extends React.Component<IProp, IState> {
     constructor(props: IProp) {
         super(props);
+        props.resetPassword(this.resetState);
         this.state = {
             password: '',
             repeatpassword: '',
@@ -29,6 +31,17 @@ export class PasswordInput extends React.Component<IProp, IState> {
             invalidPaswordMessage: '',
             invalidRepeatMessage: ''
         };
+    }
+
+    resetState = () => {
+        this.setState({
+            password: '',
+            repeatpassword: '',
+            passwordValid: Validity.none,
+            repeatValid: Validity.none,
+            invalidPaswordMessage: '',
+            invalidRepeatMessage: ''
+        });
     }
 
     //State Setting

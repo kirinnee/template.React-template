@@ -34,11 +34,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="src\index.html" />
     <Content Include="src\images\cross.svg" />
     <Content Include="src\images\tick.svg" />
     <Content Include="src\FormComponents\FormInput.tsx" />
-    <Content Include="src\Form\CoordinateRegistrationForm.tsx" />
-    <Content Include="src\index.html" />
+    <Content Include="src\Form\CoordinatorRegistrationForm.tsx" />
     <Content Include="src\style.scss" />
     <Content Include="test\mocha.opts" />
     <Content Include="test\ui\tsconfig.json" />
@@ -55,6 +55,7 @@
     <Folder Include="src\FormComponents\" />
     <Folder Include="src\Form\" />
     <Folder Include="src\images\" />
+    <Folder Include="src\Modules\" />
     <Folder Include="test\" />
     <Folder Include="src\" />
     <Folder Include="test\ui\" />
@@ -73,18 +74,41 @@
     <TypeScriptCompile Include="src\Address.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\AdminRegistrationForm_index.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\BusinessRegistrationForm_index.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\CoordinatorRegistrationForm_index.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\FormComponents\Department.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\FormComponents\Designation.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\FormComponents\Email.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\FormComponents\Password.tsx" />
     <TypeScriptCompile Include="src\FormComponents\EmployeeNumber.tsx" />
     <TypeScriptCompile Include="src\FormComponents\Contact.tsx" />
     <TypeScriptCompile Include="src\FormComponents\NRIC.tsx" />
+    <TypeScriptCompile Include="src\Form\AdminRegistrationForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\image.d.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\Modules\EmailValidation.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\PaymentPreference.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Form\ServiceVendorBusinessForm.tsx">
+    <TypeScriptCompile Include="src\Form\BusinessRegistrationForm.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\FormComponents\Name.tsx">

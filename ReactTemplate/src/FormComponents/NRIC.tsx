@@ -3,7 +3,10 @@ import { ChangeEvent } from 'react';
 import { FormInput } from './FormInput';
 import { ValidityIcon, Validity } from './Validation';
 
-interface IProp { }
+interface IProp {
+    getNRIC: (s: string) => void;
+    resetNRIC: (event: Function) => void;
+}
 
 interface IState {
     nric: string;
@@ -15,7 +18,12 @@ export class NRICInput extends React.Component<IProp, IState>{
 
     constructor(props: IProp) {
         super(props);
+        props.resetNRIC(this.resetState);
         this.state = { nric: '', valid: Validity.none };
+    }
+
+    resetState = () => {
+        this.setState({ nric: '', valid: Validity.none });
     }
 
     IsNRICValid(nric: string) {
@@ -53,6 +61,7 @@ export class NRICInput extends React.Component<IProp, IState>{
         let val: string | null = event.target!['value'];
         let nric: string = val === null ? '' : val;
         this.setState({ nric: nric });
+        this.props.getNRIC(nric);
         if (this.IsNRICValid(nric)) {
             this.setState({ valid: Validity.valid });
         } else {

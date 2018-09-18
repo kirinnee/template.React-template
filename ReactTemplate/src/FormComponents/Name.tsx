@@ -3,6 +3,7 @@ import { FormInput } from './FormInput';
 import { ChangeEvent } from 'react';
 interface IProp {
     getName: (s: string) => void;
+    resetName: (event: Function) => void;
 }
 
 interface IState {
@@ -13,7 +14,14 @@ interface IState {
 export class NameInput extends React.Component<IProp, IState> {
     constructor(props: IProp) {
         super(props);
+        props.resetName(this.resetState);
         this.state = { value: '' };
+    }
+
+    resetState = () => {
+        this.setState({
+            value: ""
+        });
     }
 
     setValue = (event: ChangeEvent) => {

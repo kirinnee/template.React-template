@@ -4,6 +4,7 @@
 
 interface IProp {
     updateAddress;
+    resetAddress: (event: Function) => void;
 }
 
 interface IState extends IAddress {
@@ -20,15 +21,28 @@ interface IState extends IAddress {
 class Address extends React.Component<IProp, IState> {
     constructor(props: IProp) {
         super(props);
+        props.resetAddress(this.resetState);
         this.state =
             {
-                lineOne: 'Line One',
-                lineTwo: 'Line Two',
-                postalCode: 'Postal Code',
-                city: 'City',
-                country: 'Country'
+                lineOne: '',
+                lineTwo: '',
+                postalCode: '',
+                city: '',
+                country: ''
             };
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    resetState = () => {
+        this.setState({
+            lineOne: '',
+            lineTwo: '',
+            postalCode: '',
+            city: '',
+            country: ''
+        });
+
+
     }
 
     handleChange(event) {
@@ -45,6 +59,8 @@ class Address extends React.Component<IProp, IState> {
         newState[name] = value;
         this.setState(newState);
         this.props["updateAddress"](this.state);
+        console.log(name);
+        console.log(this.state);
     }
 
     render() {
@@ -52,11 +68,11 @@ class Address extends React.Component<IProp, IState> {
             <div id="address-form-group" className="form-group">
                 <label>Address</label>
                 <div className="form-input-holder">
-                    <input className={"input-size"} name="lineOne" type="text" placeholder={this.state.lineOne} onChange={this.handleChange} /><br /><br />
-                    <input className={"input-size"} name="lineTwo" type="text" placeholder={this.state.lineTwo} onChange={this.handleChange} /><br /><br />
-                    <input className={"input-size"} name="postalCode" type="text" placeholder={this.state.postalCode} onChange={this.handleChange} /><br /><br />
-                    <input className={"input-size"} name="city" type="text" placeholder={this.state.city} onChange={this.handleChange} /><br /><br />
-                    <input className={"input-size"} name="country" type="text" placeholder={this.state.country} onChange={this.handleChange} />
+                    <input className={"input-size"} name="lineOne" type="text" placeholder="Line One" value={this.state.lineOne} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="lineTwo" type="text" placeholder="Line Two" value={this.state.lineTwo} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="postalCode" type="text" placeholder="Postal Code" value={this.state.postalCode} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="city" type="text" placeholder="City" value={this.state.city} onChange={this.handleChange} /><br /><br />
+                    <input className={"input-size"} name="country" type="text" placeholder="Country" value={this.state.country} onChange={this.handleChange} />
                 </div>
             </div>
         );

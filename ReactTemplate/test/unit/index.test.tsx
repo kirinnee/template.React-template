@@ -14,12 +14,12 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('<Address/>', () => {
 
     it('should have the right default values for each of its fields', () => {
-        const wrapper = shallow(<Address updateAddress={(e) => {console.log(e) }} />);
-        wrapper.state("lineOne").should.be.equal('Line One');
-        wrapper.state("lineTwo").should.be.equal('Line Two');
-        wrapper.state("postalCode").should.be.equal('Postal Code');
-        wrapper.state("city").should.be.equal('City');
-        wrapper.state("country").should.be.equal('Country');
+        const wrapper = shallow(<Address resetAddress={(event: Function) => {}} updateAddress={(e) => {console.log(e) }} />);
+        wrapper.state("lineOne").should.be.equal('');
+        wrapper.state("lineTwo").should.be.equal('');
+        wrapper.state("postalCode").should.be.equal('');
+        wrapper.state("city").should.be.equal('');
+        wrapper.state("country").should.be.equal('');
     });
     
 });

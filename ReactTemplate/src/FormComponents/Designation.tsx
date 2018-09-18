@@ -2,8 +2,8 @@
 import { FormInput } from './FormInput';
 import { ChangeEvent } from 'react';
 interface IProp {
-    getContact: (s: string) => void;
-    resetContact: (event: Function) => void;
+    getDesignation: (s: string) => void;
+    resetDesignation: (event: Function) => void;
 }
 
 interface IState {
@@ -11,10 +11,10 @@ interface IState {
 }
 
 
-export class ContactInput extends React.Component<IProp, IState> {
+export class DesignationInput extends React.Component<IProp, IState> {
     constructor(props: IProp) {
         super(props);
-        props.resetContact(this.resetState);
+        props.resetDesignation(this.resetState);
         this.state = { value: '' };
     }
 
@@ -26,12 +26,12 @@ export class ContactInput extends React.Component<IProp, IState> {
         this.setState({
             value: (event.target['value'] as string)
         });
-        this.props.getContact(event.target['value']);
+        this.props.getDesignation(event.target['value']);
     }
 
     render() {
         return (
-            <FormInput cls='' label='Contact No.' type='tel' value={this.state.value} addition={undefined} change={this.setValue}/>
+            <FormInput cls='' label='Designation' type='text' value={this.state.value} addition={undefined} change={this.setValue} />
         );
     }
 }

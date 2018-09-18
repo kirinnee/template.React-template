@@ -1,14 +1,27 @@
 module.exports = {
     input: {
-        index: './src/index.tsx'
+        BusinessRegistrationForm: './src/BusinessRegistrationForm_index.tsx',
+        CoordinatorRegistrationForm: './src/CoordinatorRegistrationForm_index.tsx',
+        AdminRegistrationForm: './src/AdminRegistrationForm_index.tsx'
     },
-    output: '[name].min.js',
     htmls: [
         {
-            filename: 'index.html',
+            filename: 'BusinessRegistrationForm.html',
             title: 'Home',
             template: 'index.html',
-            chunks: ['index']
+            chunks: ['BusinessRegistrationForm']
+        },
+        {
+            filename: 'CoordinatorRegistrationForm.html',
+            title: 'Home',
+            template: 'index.html',
+            chunks: ['CoordinatorRegistrationForm']
+        },
+        {
+            filename: 'AdminRegistrationForm.html',
+            title: 'Home',
+            template: 'index.html',
+            chunks: ['AdminRegistrationForm']
         }
     ]
 };

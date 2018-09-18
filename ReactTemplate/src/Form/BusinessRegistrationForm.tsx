@@ -2,6 +2,7 @@
 import { IAddress, Address } from '../Address';
 import { PaymentPreference } from '../PaymentPreference';
 import { NameInput } from '../FormComponents/Name';
+import { FormInput } from '../FormComponents/FormInput';
 
 interface IProp {
     formid: string;
@@ -12,7 +13,8 @@ interface IState {
     address: IAddress;
     uen: string;
     employeeCount: string;
-    paymentPreference: string;
+    paymentPreference: string[];
+    reset: Function[];
 }
 
 export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
@@ -32,7 +34,8 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
             },
             uen: '',
             employeeCount: '--Please Select--',
-            paymentPreference:''
+            paymentPreference: [],
+            reset:[]
             };
         this.updateEmployeeCount = this.updateEmployeeCount.bind(this);
         this.updateUEN = this.updateUEN.bind(this);
@@ -43,41 +46,76 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
 
     }
 
+    registerReset = (event: Function) => {
+        let arr = this.state.reset;
+        arr.push(event);
+        this.setState({ reset: arr });
+    }
+
+    resetFields = () => {
+        this.setState({
+            name: '',
+            address:
+            {
+                lineOne: '',
+                lineTwo: '',
+                postalCode: '',
+                city: '',
+                country: '',
+                reset: []
+            },
+            uen: '',
+            employeeCount: '--Please Select--',
+            paymentPreference: []
+        });
+    }
+
     updateEmployeeCount(event) {
         this.setState({ employeeCount: event.target.value });
-        console.log(event.target.value);
     }
 
     updateUEN(event) {
         this.setState({ uen: event.target.value });
-        console.log(event.target.value);
     }
 
     updateName(val) {
         this.setState({ name: val });
-        console.log(val);
     }
 
     updateAddress(val) {
         this.setState({ address: val });
-        console.log(this.state);
     }
 
     updatePaymentPreference(val) {
         this.setState({ paymentPreference: val });
-        console.log(this.state);
     }
 
     submitForm() {
-        sessionStorage.setItem("Business", JSON.stringify(this.state));
+        if (this.state.name == '' ||
+            this.state.address.city == '' ||
+            this.state.address.lineOne == '' ||
+            this.state.address.lineTwo == '' ||
+            this.state.address.postalCode == '' ||
+            this.state.employeeCount == '--Please Select--' ||
+            this.state.paymentPreference.length == 0 ||
+            this.state.uen == '')
+        {
+            alert("Please fill in all fields before submitting the form");
+        } else {
+            sessionStorage.setItem(("Business" + sessionStorage.length.toString()), JSON.stringify(this.state));
+            alert("Thank you, " + this.state.name + "! We will get back to you after we process your registration!");
+            console.log(this.state);
+            this.resetFields();
+            this.state.reset.Every((f: Function) => f());
+        }
     }
-    tt
+    
     render() {
         return (
             <div className='form-container' id={this.props.formid}>
                 <form>
-                    <NameInput getName={this.updateName} />
-                    <Address updateAddress={this.updateAddress} />
+                    <NameInput resetName={this.registerReset} getName={this.updateName} />
+                    <Address resetAddress={this.registerReset} updateAddress={this.updateAddress} />
                     <FormInput cls='' addition={undefined} type='text' label='UEN' value={this.state.uen} change={this.updateUEN} />                        
                     <div className="form-group">
                         <label>Company Size</label>
@@ -91,9 +129,9 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
                             </select>
                         </div>
                     </div>
-                    <PaymentPreference updatePaymentPreference={this.updatePaymentPreference}/>
+                    <PaymentPreference resetPaymentPreference={this.registerReset} updatePaymentPreference={this.updatePaymentPreference}/>
                     <hr />
-                    <input type="submit" value="Submit" onClick={this.submitForm}/>
+                    <input type="button" value="Submit" onClick={this.submitForm}/>
                 </form>
             </div>
         );
