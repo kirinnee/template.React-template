@@ -84,6 +84,7 @@ export class ServiceVendorBusinessForm extends React.Component<IProp,IState> {
 
     updateAddress(val) {
         this.setState({ address: val });
+        console.log("Updated");
     }
 
     updatePaymentPreference(val) {

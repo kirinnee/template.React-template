@@ -23941,6 +23941,7 @@ var ServiceVendorBusinessForm = /** @class */ (function (_super) {
     };
     ServiceVendorBusinessForm.prototype.updateAddress = function (val) {
         this.setState({ address: val });
+        console.log("Updated");
     };
     ServiceVendorBusinessForm.prototype.updatePaymentPreference = function (val) {
         this.setState({ paymentPreference: val });
